@@ -145,6 +145,30 @@ public abstract class AbstractDBClient<E extends AbstractEntity<?>> extends Abst
         	}
         return q.getResultList();
     }
+
+	/**
+     * <p>
+     *   Retorna todas as entidades de persistência E que foram entregues pela Named Query 
+     *   namedQuery com parâmetros definidos em params.
+     * </p>
+     * @param namedQuery NamedQuery que será invocada.
+     * @param params Parâmetros que a nemdQuery espera que sejam declarados.
+     * @return Lista com entidades E retornadas pela namedQuery.
+     */
+    protected List<E> getAllByNamedQuery(
+    	String namedQuery, Map<String, Object> params, int limit, int offset 
+    ) {
+    	getEntityManager().getEntityManagerFactory().getCache().evictAll();
+    	TypedQuery<E> q = (TypedQuery<E>) getEntityManager().createNamedQuery(
+    		getEntityClass().getSimpleName() + "." + namedQuery, getEntityClass()
+    	);
+        if (params != null)
+        	for (Object keyObj: params.keySet()) {
+        		String key = (String) keyObj;
+        		q.setParameter(key, params.get(key));
+        	}
+        return q.setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
     
     /**
      * <p>
