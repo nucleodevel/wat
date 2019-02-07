@@ -1,7 +1,5 @@
 package org.nucleodevel.webapptemplate.session;
 
-import java.util.Date;
-
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -41,13 +39,6 @@ public abstract class AbstractSessionDAO {
 	 */
 	public boolean isMobile() {
 		return ServletUtils.isMobile();
-	}
-	
-	/**
-	 * @return Atalho para fornecer a data atual do servidor do sistema.
-	 */
-	public Date getDate() {
-		return new Date();
 	}
 	
 }

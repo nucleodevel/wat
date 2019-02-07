@@ -2,6 +2,7 @@ package org.nucleodevel.webapptemplate.controller;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -127,6 +128,13 @@ public abstract class AbstractController
 	 */
 	private Date end;
 	
+	/**
+	 * <p>
+	 *   Atributo que armazena a busca por todos os items do tipo E.
+	 * </p>
+	 */
+	private List<E> all;
+	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
@@ -135,7 +143,7 @@ public abstract class AbstractController
 	 */
 	
     
-	public DAO getDao() {
+	protected DAO getDao() {
     	return dao;
 	}
     
@@ -217,7 +225,6 @@ public abstract class AbstractController
 		this.end = end;
 	}
 	
-	
 	/**
 	 * <p>
 	 *   Este método não é um getter propriamente dito, pois ele opera sobre {@link #selected 
@@ -246,6 +253,30 @@ public abstract class AbstractController
 	 */
 	public void setNewSelected(E selected) {
 		this.selected = selected;
+	}
+
+	/**
+	 * <p>
+	 *   Retorna a lista de todas as entidades E presentes no atributo all sem forçar a releitura.
+	 * </p>
+	 * @return Lista com todas as entidades E presentes na última leitura feita no datasource.
+	 */
+	public List<E> getAll() {
+		return getAll(false);
+	}
+	
+	/**
+	 * <p>
+	 *   Se refresh for verdadeiro ou o atributo all for null, força a leitura desta lista no 
+	 *   datasource e armazena-a em all; caso contrário, mantém all em seu estado atual, ou seja, 
+	 *   all terá a lista da última leitura feita no datasource. Apoś isso, retorna all.
+	 * </p>
+	 * @return Lista com todas as entidades E presentes no atributo all.
+	 */
+	public List<E> getAll(boolean refresh) {
+		if (all == null || refresh)
+			all = getDao().getAll();
+    	return all;
 	}
 	
 	

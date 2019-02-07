@@ -40,13 +40,6 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
      */
     private Class<E> entityClass;
 	
-	/**
-	 * <p>
-	 *   Atributo que armazena a busca por todos os items do tipo E.
-	 * </p>
-	 */
-	private List<E> all;
-	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
@@ -107,37 +100,13 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 
 	/**
 	 * <p>
-	 *   Retorna a lista de todas as entidades E presentes no atributo all sem forçar a releitura.
-	 * </p>
-	 * @return Lista com todas as entidades E presentes na última leitura feita no datasource.
-	 */
-	public List<E> getAll() {
-		return getAll(false);
-	}
-	
-	/**
-	 * <p>
-	 *   Se refresh for verdadeiro ou o atributo all for null, força a leitura desta lista no 
-	 *   datasource e armazena-a em all; caso contrário, mantém all em seu estado atual, ou seja, 
-	 *   all terá a lista da última leitura feita no datasource. Apoś isso, retorna all.
-	 * </p>
-	 * @return Lista com todas as entidades E presentes no atributo all.
-	 */
-	public List<E> getAll(boolean refresh) {
-		if (all == null || refresh)
-			all = getAllNow();
-    	return all;
-	}
-
-	/**
-	 * <p>
 	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource no 
 	 *   momento. Como esta operação é dependente do tipo do datasource, ela é delegada às 
 	 *   subclasses.
 	 * </p>
 	 * @return Lista com todas as entidades E presentes no datasource.
 	 */
-	public abstract List<E> getAllNow();
+	public abstract List<E> getAll();
 	
 	/**
 	 * <p>

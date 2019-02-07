@@ -1,6 +1,7 @@
 package org.nucleodevel.webapptemplate.session;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -47,8 +48,30 @@ public abstract class AbstractSessionController<DAO extends AbstractSessionDAO>
 	 */
     
     
-    public DAO getDao() {
+    protected DAO getDao() {
 		return dao;
+	}
+	
+	
+	/* 
+	 * --------------------------------------------------------------------------------------------
+	 *   Métodos
+	 * --------------------------------------------------------------------------------------------
+	 */
+    
+    
+    /**
+	 * @return Indica se o dispositivo que está acessando o sistema é móvel. 
+	 */
+	public boolean isMobile() {
+		return getDao().isMobile();
+	}
+	
+	/**
+	 * @return Atalho para fornecer a data atual do servidor do sistema.
+	 */
+	public Date getDate() {
+		return new Date();
 	}
 
 }

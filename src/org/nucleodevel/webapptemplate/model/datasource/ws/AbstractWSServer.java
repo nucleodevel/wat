@@ -73,7 +73,7 @@ public abstract class AbstractWSServer
 	 */
 	
     
-    public DAO getDao() {
+    protected DAO getDao() {
     	if (dao == null)
     		dao = getNewDAOInstance();
 		return dao;

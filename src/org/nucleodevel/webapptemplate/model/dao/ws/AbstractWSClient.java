@@ -86,10 +86,10 @@ public abstract class AbstractWSClient<E extends AbstractEntity<?>> extends Abst
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAllNow()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAll()
      */
     @Override
-	public List<E> getAllNow() {
+	public List<E> getAll() {
 		return 
 			getService().request().accept(MediaType.APPLICATION_XML).get(getGenericTypeForList());
 	}
