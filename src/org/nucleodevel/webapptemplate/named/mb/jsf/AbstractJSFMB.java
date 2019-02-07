@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.controller;
+package org.nucleodevel.webapptemplate.named.mb.jsf;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 
+import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 import org.nucleodevel.webapptemplate.util.PersistAction;
@@ -39,7 +39,7 @@ import org.nucleodevel.webapptemplate.util.VariableUtils;
  * @param <DAO> classe DAO que apóia o controller.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o controller pertence.
  */
-public abstract class AbstractController
+public abstract class AbstractJSFMB
 	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO> 
 	implements Serializable {
 	

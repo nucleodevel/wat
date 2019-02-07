@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.model.dao;
+package org.nucleodevel.webapptemplate.dao;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -13,7 +13,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * <p>
  *   Classe abstrata que implementa o comportamento padrão de um DAO que provê acesso ao modelo de 
  *   dados nos sistemas que usam webapptemplate. Ela realiza a persistência de entidades do tipo 
- *   parâmetro E em conjunto com uma classe controller do tipo AbstractController ou um datasource 
+ *   parâmetro E em conjunto com uma classe controller do tipo AbstractJSFMB ou um datasource 
  *   que repassa a persistência de dados para outro datasource. O fluxo normal é: a classe 
  *   solicitante possui um método que recebe dados de busca ou de uma entidade E e envia estes dados 
  *   para um método do DAO para que este realize as operações de persistência necessárias e retorne 

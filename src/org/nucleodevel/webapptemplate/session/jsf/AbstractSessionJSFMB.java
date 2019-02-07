@@ -1,9 +1,11 @@
-package org.nucleodevel.webapptemplate.session;
+package org.nucleodevel.webapptemplate.session.jsf;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.inject.Inject;
+
+import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
 
 /**
  * <p>
@@ -17,7 +19,7 @@ import javax.inject.Inject;
  * @author Dallan Augusto Toledo Reis
  * @param <DAO> classe DAO que apóia este controller.
  */
-public abstract class AbstractSessionController<DAO extends AbstractSessionDAO> 
+public abstract class AbstractSessionJSFMB<DAO extends AbstractSessionDAO> 
 	implements Serializable {
 	
 	

@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.converter;
+package org.nucleodevel.webapptemplate.named.converter.jsf;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,8 +9,8 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**<p>
@@ -29,7 +29,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  */
 @SuppressWarnings("rawtypes")
 @Named
-public abstract class AbstractConverter<E extends AbstractEntity<?>, DAO extends AbstractDAO<?>> 
+public abstract class AbstractJSFConverter<E extends AbstractEntity<?>, DAO extends AbstractDAO<?>> 
 	implements Converter {
 	
 	
@@ -42,7 +42,7 @@ public abstract class AbstractConverter<E extends AbstractEntity<?>, DAO extends
     
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractConverter seja C,todo C deve estar associado a 
+     *   Considere que a classe que estende AbstractJSFConverter seja C,todo C deve estar associado a 
      *   uma subclasse de AbstractDAO DAO e ambas, C e DAO, tenham uma classe entidade E como tipo 
      *   parametrizado. DAO será responsável por fornecer instâncias do tipo E que C necessitar.
      * </p>

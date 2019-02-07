@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.model.dao.db;
+package org.nucleodevel.webapptemplate.dao.db.jpa;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
+import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
 
 /**
  * <p>
@@ -23,7 +23,7 @@ import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em uma base de um banco de dados.
  */
-public abstract class AbstractDBClient<E extends AbstractEntity<?>> extends AbstractDAO<E> {
+public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends AbstractDAO<E> {
 	
 	
 	/* 

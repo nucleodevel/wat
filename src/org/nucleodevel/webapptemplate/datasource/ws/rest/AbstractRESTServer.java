@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.model.datasource.ws;
+package org.nucleodevel.webapptemplate.datasource.ws.rest;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -15,8 +15,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBElement;
 
+import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
@@ -36,7 +36,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
  */
-public abstract class AbstractWSServer
+public abstract class AbstractRESTServer
 	<TID, E extends AbstractEntity<TID>, DAO extends AbstractDAO<E>> {
 	
 	

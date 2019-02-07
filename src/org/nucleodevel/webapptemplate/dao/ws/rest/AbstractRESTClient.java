@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.model.dao.ws;
+package org.nucleodevel.webapptemplate.dao.ws.rest;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
 
 /**
  * <p>
@@ -26,7 +26,7 @@ import org.nucleodevel.webapptemplate.model.dao.AbstractDAO;
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade XML ou Json resultante de uma 
  *   operação de webservice.
  */
-public abstract class AbstractWSClient<E extends AbstractEntity<?>> extends AbstractDAO<E> {
+public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends AbstractDAO<E> {
 	
 	
 	/* 
