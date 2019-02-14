@@ -10,7 +10,7 @@ import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
 import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
-import org.nucleodevel.webapptemplate.util.UrlUtils;
+import org.nucleodevel.webapptemplate.util.URLUtils;
 
 /**
  * <p>
@@ -112,7 +112,7 @@ public abstract class AbstractJSFSearchMB
      */
     public Date getBegin() {
     	if (begin == null)
-    		begin = UrlUtils.getUrlDateParam("begin");
+    		begin = URLUtils.getURLDateParam("begin");
 		return begin;
 	}
 
@@ -127,7 +127,7 @@ public abstract class AbstractJSFSearchMB
      */
     public Date getEnd() {
 		if (end == null)
-			end = UrlUtils.getUrlDateParam("end");
+			end = URLUtils.getURLDateParam("end");
 		return end;
 	}
 

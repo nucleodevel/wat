@@ -55,7 +55,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
     	if (service == null) {
     		ClientConfig config = new ClientConfig();
     		Client client = ClientBuilder.newClient(config).register(MultiPartFeature.class);
-    	    service = client.target(UriBuilder.fromUri(getServerUrl()).build());
+    	    service = client.target(UriBuilder.fromUri(getServerURL()).build());
     	}
 		return service;
 	}
@@ -67,7 +67,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
      * </p>
      * @return URL do servidor que provê o webservice.
      */
-    public abstract String getServerUrl();
+    public abstract String getServerURL();
 	
     /**
      * <p>

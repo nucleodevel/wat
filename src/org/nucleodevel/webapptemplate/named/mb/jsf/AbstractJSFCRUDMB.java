@@ -14,7 +14,7 @@ import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
 import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 import org.nucleodevel.webapptemplate.util.PersistAction;
-import org.nucleodevel.webapptemplate.util.UrlUtils;
+import org.nucleodevel.webapptemplate.util.URLUtils;
 import org.nucleodevel.webapptemplate.util.VariableUtils;
 
 /**
@@ -126,7 +126,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public E getSelected() {
 		if (selected == null) {
-			String idString = UrlUtils.getUrlStringParam("id");
+			String idString = URLUtils.getURLStringParam("id");
     		
 			E newEntity = getDao().getNewEntityInstance();
     		String entityIdClass = newEntity.getEntityIdClass().getSimpleName();
