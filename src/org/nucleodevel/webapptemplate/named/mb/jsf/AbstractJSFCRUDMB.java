@@ -1,7 +1,6 @@
 package org.nucleodevel.webapptemplate.named.mb.jsf;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +10,7 @@ import javax.inject.Inject;
 
 import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
+import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
 import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 import org.nucleodevel.webapptemplate.util.PersistAction;
@@ -39,8 +39,9 @@ import org.nucleodevel.webapptemplate.util.VariableUtils;
  * @param <DAO> classe DAO que apóia o controller.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o controller pertence.
  */
-public abstract class AbstractJSFMB
-	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO> 
+public abstract class AbstractJSFCRUDMB
+	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO>
+	extends AbstractMB<SDAO> 
 	implements Serializable {
 	
 	
@@ -53,15 +54,6 @@ public abstract class AbstractJSFMB
 	
     private static final long serialVersionUID = 1L;
 	
-	/**
-	 * <p>
-	 *   Caminho padrão para as mensagens customizadas de sistema. Todo sistema deve criar este 
-	 *   arquivo e para cada controller criar as mensagens necessárias, principalmente as de 
-	 *   respostas às operações de CRUD.
-	 * </p>
-	 */
-	protected static final String RESOURCE_APP_MSG = "/resources/app-messages";
-	
     /**
      * <p>
      *   Considere que a classe que estende AbstractContoller seja C, todo C deve estar associado a 
@@ -72,16 +64,6 @@ public abstract class AbstractJSFMB
      */
     @Inject
 	private DAO dao;
-	
-	/**
-	 * <p>
-     *   Considere que a classe que estende AbstractContoller seja C e ela seja parte de um sistema 
-     *   (projeto) S. Todo sistema S deve implementar uma classe DAO de sessão SDAO que estenda a 
-     *   classe AbstractSessionDAO.
-     * </p>
-	 */
-    @Inject
-	private SDAO sessionDAO;
     
 	/**
      * <p>
@@ -106,30 +88,6 @@ public abstract class AbstractJSFMB
 	
 	/**
 	 * <p>
-	 *   O atributo begin é usado como valor de início em operações que filtram buscas por períodos. 
-	 *   Nenhuma operação de período é definida aqui neste controller, mas fornece um meio comum vez 
-	 *   os atributos de início e fim.
-	 * </p>
-	 * <p>
-     *   Tenta obter o valor inicial de um parâmetro de URL begin.
-     * </p>
-	 */
-	private Date begin;
-	
-	/**
-	 * <p>
-	 *   O atributo end é usado como valor de fim em operações que filtram buscas por períodos. 
-	 *   Nenhuma operação de período é definida aqui neste controller, mas fornece um meio comum vez 
-	 *   os atributos de início e fim.
-	 * </p>
-	 * <p>
-     *   Tenta obter o valor inicial de um parâmetro de URL end.
-     * </p>
-	 */
-	private Date end;
-	
-	/**
-	 * <p>
 	 *   Atributo que armazena a busca por todos os items do tipo E.
 	 * </p>
 	 */
@@ -145,10 +103,6 @@ public abstract class AbstractJSFMB
     
 	protected DAO getDao() {
     	return dao;
-	}
-    
-    public SDAO getSessionDAO() {
-		return sessionDAO;
 	}
 
     /**
@@ -193,36 +147,6 @@ public abstract class AbstractJSFMB
 
 	public void setSelected(E selected) {
 		this.selected = selected;
-	}
- 
-	/**
-     * <p>
-     *   Tenta obter begin via parâmetro URL 'id' ou atribui null.
-     * </p>
-     */
-    public Date getBegin() {
-    	if (begin == null)
-    		begin = UrlUtils.getUrlDateParam("begin");
-		return begin;
-	}
-
-	public void setBegin(Date begin) {
-		this.begin = begin;
-	}
-
-	/**
-     * <p>
-     *   Tenta obter end via parâmetro URL 'id' ou atribui null.
-     * </p>
-     */
-    public Date getEnd() {
-		if (end == null)
-			end = UrlUtils.getUrlDateParam("end");
-		return end;
-	}
-
-	public void setEnd(Date end) {
-		this.end = end;
 	}
 	
 	/**
