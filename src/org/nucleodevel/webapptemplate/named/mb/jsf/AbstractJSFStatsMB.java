@@ -21,7 +21,7 @@ import org.nucleodevel.webapptemplate.util.URLUtils;
  * @param <DAO> classe DAO que apóia o controller.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o controller pertence.
  */
-public abstract class AbstractJSFSearchMB
+public abstract class AbstractJSFStatsMB
 	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO>
 	extends AbstractMB<SDAO> 
 	implements Serializable {
@@ -133,6 +133,17 @@ public abstract class AbstractJSFSearchMB
 
 	public void setEnd(Date end) {
 		this.end = end;
-	}
+	}  
+	
+	
+	/* 
+	 * --------------------------------------------------------------------------------------------
+	 *   Permissões
+	 * --------------------------------------------------------------------------------------------
+	 */
+    
+    public abstract boolean canSearch();
+    
+    public abstract boolean canReport();
     
 }

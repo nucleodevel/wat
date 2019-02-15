@@ -198,6 +198,9 @@ public abstract class AbstractJSFCRUDMB
 	 * @return Lista com todas as entidades E presentes no atributo all.
 	 */
 	public List<E> getAll(boolean refresh) {
+    	if (!canAll())
+    		return null;
+    	
 		if (all == null || refresh)
 			all = getDao().getAll();
     	return all;
@@ -221,6 +224,11 @@ public abstract class AbstractJSFCRUDMB
      *   retornada uma String com este caminho.
      */
     public String create(String nextPath) {
+    	if (!canCreate()) {
+    		VariableUtils.addErrorMessage("can.error.generic");
+			return "";
+    	}
+    	
     	String classSimpleName = getEntityClass().getSimpleName();
     	String lcClassSimpleName =  
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
@@ -255,6 +263,11 @@ public abstract class AbstractJSFCRUDMB
      * </p>
      */
 	public void createOnly() {
+    	if (!canCreate()) {
+    		VariableUtils.addErrorMessage("can.error.generic");
+			return;
+    	}
+    	
 		String classSimpleName = getEntityClass().getSimpleName();
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
@@ -278,6 +291,11 @@ public abstract class AbstractJSFCRUDMB
      *   retornada uma String com este caminho.
      */
     public String edit(String nextPath) {
+    	if (!canEdit()) {
+    		VariableUtils.addErrorMessage("can.error.generic");
+			return "";
+    	}
+    	
 		String classSimpleName = getEntityClass().getSimpleName();
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
@@ -316,6 +334,11 @@ public abstract class AbstractJSFCRUDMB
      *   retornada uma String com este caminho.
      */
     public String editWithoutMessage(String nextPath) {
+    	if (!canEdit()) {
+    		VariableUtils.addErrorMessage("can.error.generic");
+			return "";
+    	}
+    	
 		String classSimpleName = getEntityClass().getSimpleName();
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
@@ -353,6 +376,11 @@ public abstract class AbstractJSFCRUDMB
      *   retornada uma String com este caminho.
      */
     public String remove(String nextPath) {  
+    	if (!canRemove()) {
+    		VariableUtils.addErrorMessage("can.error.generic");
+			return "";
+    	}
+    	
 		String classSimpleName = getEntityClass().getSimpleName();
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
@@ -410,5 +438,34 @@ public abstract class AbstractJSFCRUDMB
             }
         }
     }  
+	
+	
+	/* 
+	 * --------------------------------------------------------------------------------------------
+	 *   Permissões
+	 * --------------------------------------------------------------------------------------------
+	 */
+    
+    public abstract boolean canAll();
+    
+    public abstract boolean canView(E selected);
+    
+    public abstract boolean canCreate();
+    
+    public abstract boolean canEdit(E selected);
+    
+    public abstract boolean canRemove(E selected);
+    
+    public boolean canView() {
+    	return canView(getSelected());
+    }
+    
+    public boolean canEdit() {
+    	return canEdit(getSelected());
+    }
+    
+    public boolean canRemove() {
+    	return canRemove(getSelected());
+    }
     
 }
