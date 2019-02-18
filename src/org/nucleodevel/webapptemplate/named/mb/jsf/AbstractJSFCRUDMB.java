@@ -91,7 +91,7 @@ public abstract class AbstractJSFCRUDMB
 	 *   Atributo que armazena a busca por todos os items do tipo E.
 	 * </p>
 	 */
-	private List<E> all;
+	protected List<E> all;
 	
 	
 	/* 
@@ -206,6 +206,10 @@ public abstract class AbstractJSFCRUDMB
     	return all;
 	}
 	
+    public void setAll(List<E> all) {
+		this.all = all;
+	}
+	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
@@ -213,8 +217,8 @@ public abstract class AbstractJSFCRUDMB
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
-	
-    /**
+
+	/**
      * <p>
      *   Trata a integridade de selected, insere-o no datasource e redireciona à view posterior 
      *   descrita em nextPath.
