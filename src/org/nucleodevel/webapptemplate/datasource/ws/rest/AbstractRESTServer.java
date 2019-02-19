@@ -135,7 +135,7 @@ public abstract class AbstractRESTServer
 	@GET
     @Produces(MediaType.TEXT_XML)
     public List<E> getEntitiesBrowser() {
-        List<E> entities = getDao().getAll();
+        List<E> entities = getDao().selectAll();
         return entities;
     }
 
@@ -145,7 +145,7 @@ public abstract class AbstractRESTServer
 	@GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public List<E> getEntities() {
-    	List<E> entities = getDao().getAll();
+    	List<E> entities = getDao().selectAll();
         return entities;
     }
 
@@ -155,8 +155,8 @@ public abstract class AbstractRESTServer
 	@GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getCount() {
-        int count = getDao().getAll().size();
+    public String selectCount() {
+        int count = getDao().selectAll().size();
         return String.valueOf(count);
     }
     
@@ -168,7 +168,7 @@ public abstract class AbstractRESTServer
     @Path("{entity}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public E getOne(@PathParam("entity") TID id) {
-    	E entity = getDao().getOne(id);
+    	E entity = getDao().selectOne(id);
         return entity;
     }
 
@@ -180,7 +180,7 @@ public abstract class AbstractRESTServer
     @Path("{entity}")
     @Produces(MediaType.TEXT_XML)
     public E getOneHTML(@PathParam("entity") TID id) {
-        E entity = getDao().getOne(id);
+        E entity = getDao().selectOne(id);
         return entity;
     }
 	
@@ -224,7 +224,7 @@ public abstract class AbstractRESTServer
 	@DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
-    	E entity = getDao().getOne(id);
+    	E entity = getDao().selectOne(id);
         getDao().delete(entity);
     }
 

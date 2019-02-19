@@ -76,26 +76,26 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAll()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAll()
      */
     @Override
-	public List<E> getAll() {
-		return getAllByNamedQuery("all", null);
+	public List<E> selectAll() {
+		return selectAllByNamedQuery("all", null);
 	}
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAllByUniqueParams(java.util.Map)
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByUniqueParams(java.util.Map)
      */
     @Override
-	public List<E> getAllByUniqueParams(Map<String, Object> params) {
-		return getAllByNamedQuery("one", params);
+	public List<E> selectAllByUniqueParams(Map<String, Object> params) {
+		return selectAllByNamedQuery("one", params);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAllByRange(int[])
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByRange(int[])
 	 */
 	@Override
-    public List<E> getAllByRange(int[] range) {    	
+    public List<E> selectAllByRange(int[] range) {    	
     	TypedQuery<E> q = (TypedQuery<E>) getEntityManager().createNamedQuery(
     		getEntityClass().getSimpleName() + ".findAll", getEntityClass()
     	);
@@ -105,10 +105,10 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getCount()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectCount()
      */
     @Override
-    public int getCount() {
+    public int selectCount() {
         CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
         Root<?> rt = cq.from(getEntityClass());
         cq.select((Selection<?>) getEntityManager().getCriteriaBuilder().count(rt));
@@ -117,10 +117,10 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getOne(java.lang.Object)
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectOne(java.lang.Object)
      */
     @Override
-	public E getOne(Object id) {
+	public E selectOne(Object id) {
 		return (E) getEntityManager().find(getEntityClass(), id);
 	}
 
@@ -133,7 +133,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
      * @param params Parâmetros que a nemdQuery espera que sejam declarados.
      * @return Lista com entidades E retornadas pela namedQuery.
      */
-    protected List<E> getAllByNamedQuery(String namedQuery, Map<String, Object> params) {
+    protected List<E> selectAllByNamedQuery(String namedQuery, Map<String, Object> params) {
     	getEntityManager().getEntityManagerFactory().getCache().evictAll();
     	TypedQuery<E> q = (TypedQuery<E>) getEntityManager().createNamedQuery(
     		getEntityClass().getSimpleName() + "." + namedQuery, getEntityClass()
@@ -155,7 +155,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
      * @param params Parâmetros que a nemdQuery espera que sejam declarados.
      * @return Lista com entidades E retornadas pela namedQuery.
      */
-    protected List<E> getAllByNamedQuery(
+    protected List<E> selectAllByNamedQuery(
     	String namedQuery, Map<String, Object> params, int limit, int offset 
     ) {
     	getEntityManager().getEntityManagerFactory().getCache().evictAll();
@@ -179,8 +179,8 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
      * @param params Parâmetros que a nemdQuery espera que sejam declarados.
      * @return Lista ordenada com entidades E retornadas pela namedQuery.
      */
-    protected List<E> getAllByNamedQueryAndSort(String namedQuery, Map<String, Object> params) {
-    	return sort(getAllByNamedQuery(namedQuery, params));
+    protected List<E> selectAllByNamedQueryAndSort(String namedQuery, Map<String, Object> params) {
+    	return sort(selectAllByNamedQuery(namedQuery, params));
     }
 	
 	

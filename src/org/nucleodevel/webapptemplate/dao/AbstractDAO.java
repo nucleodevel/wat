@@ -90,65 +90,6 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 		return null;
 	}
 	
-	
-	/* 
-	 * --------------------------------------------------------------------------------------------
-	 *   Operações de leitura de dados no datasource 
-	 * --------------------------------------------------------------------------------------------
-	 */
-
-
-	/**
-	 * <p>
-	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource no 
-	 *   momento. Como esta operação é dependente do tipo do datasource, ela é delegada às 
-	 *   subclasses.
-	 * </p>
-	 * @return Lista com todas as entidades E presentes no datasource.
-	 */
-	public abstract List<E> getAll();
-	
-	/**
-	 * <p>
-	 *   Obtém uma ou mais entidades E que correspondem aos parâmetros passados para testar a 
-	 *   unicidade destes. 
-	 * </p>
-	 * @param params parâmetros cuja unicidade será testada.
-	 * @return Uma ou mais entidades E que correspondem aos parâmetros passados.
-	 */
-	public abstract List<E> getAllByUniqueParams(Map<String, Object> params);
-	
-	/**
-	 * <p>
-	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource que 
-	 *   estejam dentro do intervalo passado por parâmetro.
-	 * </p>
-	 * @param Intervalo de leitura de entidades E no datasource.
-	 * @return Lista com todas as entidades E presentes no datasource que estejam dentro do 
-	 *   intervalo passado por parâmetro.
-	 */
-	public abstract List<E> getAllByRange(int[] range);
-    
-    /**
-     * <p>
-     *   Retorna o número de entidades E existentes na persistência.
-     * </p>
-     * @return Número total de entidades E existentes  
-     */
-    public int getCount() {
-    	return getAll().size();
-    }
-
-	/**
-	 * <p>
-	 *   Obtém a entidade E cujo ID é aquele passado por parâmetro.
-	 * </p>
-	 * @param id ID da instância que será fornecida pela persistência.
-	 * @return Instância cujo ID foi passado por parâmetro ou nulo, se não existir instância com tal 
-	 *   ID.
-	 */
-	public abstract E getOne(Object id);
-	
     /**
 	 * <p>
 	 *   Método usado antes das operações de inserção e atualização na persistência para evitar que 
@@ -165,7 +106,7 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 	public boolean isAnUniqueEntity(E entity, boolean isInsert) {
 		Map<String, Object> params = getUniqueParams(entity);
 		if (params != null) {
-			List<E> uniqueItems = getAllByUniqueParams(getUniqueParams(entity));
+			List<E> uniqueItems = selectAllByUniqueParams(getUniqueParams(entity));
 			if (uniqueItems != null)
 				for (E x: uniqueItems)
 					if (isInsert || !entity.equals(x))
@@ -183,6 +124,65 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
      * @return Mapa de parâmetros unique de selected.
      */
     protected abstract Map<String, Object> getUniqueParams(E entity);
+	
+	
+	/* 
+	 * --------------------------------------------------------------------------------------------
+	 *   Operações de leitura de dados no datasource 
+	 * --------------------------------------------------------------------------------------------
+	 */
+
+
+	/**
+	 * <p>
+	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource no 
+	 *   momento. Como esta operação é dependente do tipo do datasource, ela é delegada às 
+	 *   subclasses.
+	 * </p>
+	 * @return Lista com todas as entidades E presentes no datasource.
+	 */
+	public abstract List<E> selectAll();
+	
+	/**
+	 * <p>
+	 *   Obtém uma ou mais entidades E que correspondem aos parâmetros passados para testar a 
+	 *   unicidade destes. 
+	 * </p>
+	 * @param params parâmetros cuja unicidade será testada.
+	 * @return Uma ou mais entidades E que correspondem aos parâmetros passados.
+	 */
+	public abstract List<E> selectAllByUniqueParams(Map<String, Object> params);
+	
+	/**
+	 * <p>
+	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource que 
+	 *   estejam dentro do intervalo passado por parâmetro.
+	 * </p>
+	 * @param Intervalo de leitura de entidades E no datasource.
+	 * @return Lista com todas as entidades E presentes no datasource que estejam dentro do 
+	 *   intervalo passado por parâmetro.
+	 */
+	public abstract List<E> selectAllByRange(int[] range);
+    
+    /**
+     * <p>
+     *   Retorna o número de entidades E existentes na persistência.
+     * </p>
+     * @return Número total de entidades E existentes  
+     */
+    public int selectCount() {
+    	return selectAll().size();
+    }
+
+	/**
+	 * <p>
+	 *   Obtém a entidade E cujo ID é aquele passado por parâmetro.
+	 * </p>
+	 * @param id ID da instância que será fornecida pela persistência.
+	 * @return Instância cujo ID foi passado por parâmetro ou nulo, se não existir instância com tal 
+	 *   ID.
+	 */
+	public abstract E selectOne(Object id);
 	
 	
 	/* 

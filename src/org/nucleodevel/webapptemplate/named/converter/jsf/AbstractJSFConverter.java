@@ -97,7 +97,7 @@ public abstract class AbstractJSFConverter<E extends AbstractEntity<?>, DAO exte
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
     	if (value == null || value.length() == 0 || getIdFromString(value) == null)
     		return null;
-   	    return dao.getOne(getIdFromString(value));
+   	    return dao.selectOne(getIdFromString(value));
     }
 
     /* (non-Javadoc)

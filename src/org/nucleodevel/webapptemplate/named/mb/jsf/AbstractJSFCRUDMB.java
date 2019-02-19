@@ -133,13 +133,13 @@ public abstract class AbstractJSFCRUDMB
     		
     		if (idString != null && !idString.equals("")) {
 	    		if (entityIdClass.equals("Long"))
-	    			selected = getDao().getOne(Long.parseLong(idString));
+	    			selected = getDao().selectOne(Long.parseLong(idString));
 	    		else if (entityIdClass.equals("Integer"))
-	    			selected = getDao().getOne(Integer.parseInt(idString));
+	    			selected = getDao().selectOne(Integer.parseInt(idString));
 	    		else if (entityIdClass.equals("Short"))
-	    			selected = getDao().getOne(Short.parseShort(idString));
+	    			selected = getDao().selectOne(Short.parseShort(idString));
 	    		else
-	    			selected = getDao().getOne(idString);
+	    			selected = getDao().selectOne(idString);
     		}
 		}
 		return selected;
@@ -202,7 +202,7 @@ public abstract class AbstractJSFCRUDMB
     		return null;
     	
 		if (all == null || refresh)
-			all = getDao().getAll();
+			all = getDao().selectAll();
     	return all;
 	}
 	

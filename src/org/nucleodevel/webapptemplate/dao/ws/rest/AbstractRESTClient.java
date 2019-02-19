@@ -86,27 +86,27 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAll()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAll()
      */
     @Override
-	public List<E> getAll() {
+	public List<E> selectAll() {
 		return 
 			getService().request().accept(MediaType.APPLICATION_XML).get(getGenericTypeForList());
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getAllByRange(int[])
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByRange(int[])
 	 */
 	@Override
-    public List<E> getAllByRange(int[] range) {    	
+    public List<E> selectAllByRange(int[] range) {    	
     	return null;
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#getOne(java.lang.Object)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectOne(java.lang.Object)
 	 */
 	@Override
-	public E getOne(Object id) {
+	public E selectOne(Object id) {
 		if (id != null)
 			return 
 				getService().path(id.toString()).request().accept(MediaType.APPLICATION_XML)
