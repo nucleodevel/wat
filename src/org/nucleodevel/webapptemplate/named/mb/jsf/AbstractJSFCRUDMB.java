@@ -198,7 +198,7 @@ public abstract class AbstractJSFCRUDMB
 	 * @return Lista com todas as entidades E presentes no atributo all.
 	 */
 	public List<E> getAll(boolean refresh) {
-    	if (!canAll())
+    	if (!canViewAll())
     		return null;
     	
 		if (all == null || refresh)
@@ -450,7 +450,7 @@ public abstract class AbstractJSFCRUDMB
 	 * --------------------------------------------------------------------------------------------
 	 */
     
-    public abstract boolean canAll();
+    public abstract boolean canViewAll();
     
     public abstract boolean canView(E selected);
     
