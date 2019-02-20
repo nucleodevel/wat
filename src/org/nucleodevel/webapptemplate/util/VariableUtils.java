@@ -69,9 +69,9 @@ public class VariableUtils {
     /**
      * <p>
      *   Este método lê o conteúdo da mensagem fornecida pela exceção ou, se esta mengagem não 
-     *   existir, da mensagem cuja chave é passada por parâmetro e está localizada no arquivo padrão 
-     *   cujo caminho é referenciado por RESOURCE_GENERIC_MSG. Depois, adiciona esta mensagem ao 
-     *   fluxo de mensagens JSF como uma mensagem de erro. 
+     *   existir, da mensagem cuja chave é passada por parâmetro e está localizada no arquivo 
+     *   padrão cujo caminho é referenciado por RESOURCE_GENERIC_MSG. Depois, adiciona esta 
+     *   mensagem ao fluxo de mensagens JSF como uma mensagem de erro. 
      * </p>
      * @param ex Exceção que motiva a mensagem de erro.
      * @param defaultMsg Mensagem usada no caso da exceção não fornecer mensagem alguma.

@@ -24,8 +24,8 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
     
 	/**
      * <p>
-     *   Atributo que armazena a classe assumida por TID, que é o tipo do ID da entidade. Geralmente 
-     *   usado para se obter nome desta classe.
+     *   Atributo que armazena a classe assumida por TID, que é o tipo do ID da entidade. 
+     *   Geralmente usado para se obter nome desta classe.
      * </p>
      */
     private Class<TID> entityIdClass;
@@ -140,7 +140,7 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
 	
 	/**
      * <p>
-     *   Retorna uma string que mostras os dados principais da entidade em uma forma mais adequada à 
+     *   Retorna uma string que mostra os dados principais da entidade em uma forma mais adequada à 
      *   comparação. Como cada subclasse conhece quais são seus atributos relevantes, elas devem 
      *   implementar este método.
      * </p>

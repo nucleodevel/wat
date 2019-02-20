@@ -8,11 +8,11 @@ import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um managed bean JSF que tem acesso aos
+ *   Classe abstrata que implementa o comportamento padrão de um managed bean que tem acesso aos 
  *   dados da sessão atual via o SDAO.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o controller pertence.
+ * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
 public abstract class AbstractMB<SDAO extends AbstractSessionDAO> implements Serializable {
 	
@@ -29,15 +29,14 @@ public abstract class AbstractMB<SDAO extends AbstractSessionDAO> implements Ser
 	/**
 	 * <p>
 	 *   Caminho padrão para as mensagens customizadas de sistema. Todo sistema deve criar este 
-	 *   arquivo e para cada controller criar as mensagens necessárias, principalmente as de 
-	 *   respostas às operações de CRUD.
+	 *   arquivo e para cada managed bean criar as mensagens necessárias.
 	 * </p>
 	 */
 	protected static final String RESOURCE_APP_MSG = "/resources/app-messages";
 	
 	/**
 	 * <p>
-     *   Considere que a classe que estende AbstractContoller seja C e ela seja parte de um sistema 
+     *   Considere que a classe que estende AbstractMB seja MB e ela seja parte de um sistema 
      *   (projeto) S. Todo sistema S deve implementar uma classe DAO de sessão SDAO que estenda a 
      *   classe AbstractSessionDAO.
      * </p>

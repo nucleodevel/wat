@@ -23,15 +23,15 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * <p>
  *   Classe abstrata que implementa o comportamento padrão de um servidor que provê um recurso de 
  *   webservice que retorna entidades de um tipo E. Esta classe é considerada um datasource para um 
- *   DAO, que seria o cliente de um web service, do tipo AbstractWSClient. Então, AbstractWSClient é 
- *   o DAO e esta classe o Datasource.   
+ *   DAO, que seria o cliente de um web service, do tipo AbstractWSClient. Então, AbstractWSClient 
+ *   é o DAO e esta classe o Datasource.   
  * </p>
  * <p>
  *   Na verdade, esta classe é um datasource que redireciona sua requisição para um DAO e seu 
- *   datasource. Ou seja, um AbstractWSServer redireciona suas requisições geralmente para um DAO de 
- *   banco de dados e este para seu datasource. Porém, nada impede que esta classe redirecione para 
- *   outro webservice, porém o mais típico é que o DAO seja de banco de dados, ou seja, um DAO do 
- *   tipo AbstractDbClient. 
+ *   datasource. Ou seja, um AbstractWSServer redireciona suas requisições geralmente para um DAO 
+ *   de banco de dados e este para seu datasource. Porém, nada impede que esta classe redirecione 
+ *   para outro webservice, porém o mais típico é que o DAO seja de banco de dados, ou seja, um DAO 
+ *   do tipo AbstractDbClient. 
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
@@ -78,6 +78,20 @@ public abstract class AbstractRESTServer
     		dao = getNewDAOInstance();
 		return dao;
 	}
+    
+	/**
+     * <p>
+     *   Obtém tipo class do tipo DAO via ParameterizedClassUtils.
+     * </p>
+     */
+    @SuppressWarnings("unchecked")
+	protected Class<DAO> getDAOClass() {
+    	if (daoClass == null)
+    		daoClass = 
+    			(Class<DAO>) ParameterizedClassUtils
+    				.getParameterClassFromParameterizedClass(getClass(), 2);
+    	return daoClass;
+    }
 
     /**
 	 * <p>
@@ -106,20 +120,6 @@ public abstract class AbstractRESTServer
 		}
 		return null;
 	}
-    
-	/**
-     * <p>
-     *   Obtém tipo class do tipo DAO via ParameterizedClassUtils.
-     * </p>
-     */
-    @SuppressWarnings("unchecked")
-	protected Class<DAO> getDAOClass() {
-    	if (daoClass == null)
-    		daoClass = 
-    			(Class<DAO>) ParameterizedClassUtils
-    				.getParameterClassFromParameterizedClass(getClass(), 2);
-    	return daoClass;
-    }
 	
 	
 	/* 
@@ -155,7 +155,7 @@ public abstract class AbstractRESTServer
 	@GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
-    public String selectCount() {
+    public String getCount() {
         int count = getDao().selectAll().size();
         return String.valueOf(count);
     }

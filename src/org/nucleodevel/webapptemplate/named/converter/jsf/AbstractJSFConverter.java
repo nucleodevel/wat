@@ -42,9 +42,10 @@ public abstract class AbstractJSFConverter<E extends AbstractEntity<?>, DAO exte
     
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractJSFConverter seja C,todo C deve estar associado a 
-     *   uma subclasse de AbstractDAO DAO e ambas, C e DAO, tenham uma classe entidade E como tipo 
-     *   parametrizado. DAO será responsável por fornecer instâncias do tipo E que C necessitar.
+     *   Considere que a classe que estende AbstractJSFConverter seja C,todo C deve estar associado 
+     *   a uma subclasse de AbstractDAO DAO e ambas, C e DAO, tenham uma classe entidade E como 
+     *   tipo parametrizado. DAO será responsável por fornecer instâncias do tipo E que C 
+     *   necessitar.
      * </p>
      */
     @Inject

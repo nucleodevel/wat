@@ -12,7 +12,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 /**
  * <p>
- *   Implementa algumas funcionalidades úteis sobre servlets para uso nos controllers.
+ *   Implementa algumas funcionalidades úteis sobre servlets para uso nos managed beans.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */

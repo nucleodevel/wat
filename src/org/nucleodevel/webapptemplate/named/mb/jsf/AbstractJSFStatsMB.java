@@ -14,12 +14,13 @@ import org.nucleodevel.webapptemplate.util.URLUtils;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um managed bean para buscas.
+ *   Classe abstrata que implementa o comportamento padrão de um managed bean para estatísticas, 
+ *   buscas e relatórios, a fim de não poluir o managed bean responsável pelo CRUD da entidade E.
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
- * @param <DAO> classe DAO que apóia o controller.
- * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o controller pertence.
+ * @param <DAO> classe DAO que apóia o managed bean.
+ * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
 public abstract class AbstractJSFStatsMB
 	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO>
@@ -38,10 +39,10 @@ public abstract class AbstractJSFStatsMB
 	
     /**
      * <p>
-     *   Considere que a classe que estende AbstractContoller seja C, todo C deve estar associado a 
-     *   uma subclasse de AbstractDAO DAO e ambas, C e DAO, tenham uma classe entidade E como tipo 
-     *   parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD tipo E 
-     *   que C necessitar.
+     *   Considere que a classe que estende AbstractMB seja MB. Todo MB deve estar associado a 
+     *   uma subclasse de AbstractDAO DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
+     *   parametrizado. DAO será responsável por efetivamente realizar as operações no datasource  
+     *   que MB necessitar.
      * </p>
      */
     @Inject
@@ -49,7 +50,7 @@ public abstract class AbstractJSFStatsMB
     
 	/**
      * <p>
-     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do controller. 
+     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do managed bean. 
      *   Geralmente usado para se obter nome desta classe.
      * </p>
      */
@@ -57,9 +58,9 @@ public abstract class AbstractJSFStatsMB
 	
 	/**
 	 * <p>
-	 *   O atributo begin é usado como valor de início em operações que filtram buscas por períodos. 
-	 *   Nenhuma operação de período é definida aqui neste controller, mas fornece um meio comum vez 
-	 *   os atributos de início e fim.
+	 *   O atributo begin é usado como valor de início em operações que filtram buscas por 
+	 *   períodos. Nenhuma operação de período é definida aqui neste managed bean, mas fornece um 
+	 *   meio comum de armazenar os atributos de início e fim.
 	 * </p>
 	 * <p>
      *   Tenta obter o valor inicial de um parâmetro de URL begin.
@@ -69,9 +70,9 @@ public abstract class AbstractJSFStatsMB
 	
 	/**
 	 * <p>
-	 *   O atributo end é usado como valor de fim em operações que filtram buscas por períodos. 
-	 *   Nenhuma operação de período é definida aqui neste controller, mas fornece um meio comum vez 
-	 *   os atributos de início e fim.
+	 *   O atributo end é usado como valor de início em operações que filtram buscas por 
+	 *   períodos. Nenhuma operação de período é definida aqui neste managed bean, mas fornece um 
+	 *   meio comum de armazenar os atributos de início e fim.
 	 * </p>
 	 * <p>
      *   Tenta obter o valor inicial de um parâmetro de URL end.
@@ -142,8 +143,22 @@ public abstract class AbstractJSFStatsMB
 	 * --------------------------------------------------------------------------------------------
 	 */
     
+	/**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a visualização do resultado de 
+     *   uma busca, geralmente expressa em search.jsf
+     * </p>
+     * @return Permissão para visualização do resultado de uma busca
+     */
     public abstract boolean canSearch();
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a visualização do resultado de 
+     *   uma relatório, geralmente expresso em report.jsf
+     * </p>
+     * @return Permissão para visualização do resultado de um relatório
+     */
     public abstract boolean canReport();
     
 }

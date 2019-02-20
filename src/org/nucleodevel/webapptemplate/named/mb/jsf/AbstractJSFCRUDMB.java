@@ -19,12 +19,12 @@ import org.nucleodevel.webapptemplate.util.VariableUtils;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um controller MVC nos sistemas que 
+ *   Classe abstrata que implementa o comportamento padrão de um managed bean MVC nos sistemas que 
  *   usam webapptemplate. Ela controla o fluxo das operações de CRUD sobre as entidades do tipo E 
  *   e realiza a persistência dessas entidades em conjunto com uma classe DAO do tipo AbstractDAO, 
  *   que pertence ao modelo de dados e efetivamente realiza as operações no datasource. Este 
- *   controller também depende de uma classe DAO de sessão SDAO, que extende AbstractSessionDAO, 
- *   para obter os dados da sessão do sistema ao qual o controller pertence.
+ *   managed bean também depende de uma classe DAO de sessão SDAO, que extende AbstractSessionDAO, 
+ *   para obter os dados da sessão do sistema ao qual o managed bean pertence.
  * </p>
  * <p>
  *   Outro detalhe importante é que esta classe é tipicamente usada como uma Named ViewScoped. Isso 
@@ -36,8 +36,8 @@ import org.nucleodevel.webapptemplate.util.VariableUtils;
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
- * @param <DAO> classe DAO que apóia o controller.
- * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o controller pertence.
+ * @param <DAO> classe DAO que apóia o managed bean.
+ * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
 public abstract class AbstractJSFCRUDMB
 	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO>
@@ -56,10 +56,10 @@ public abstract class AbstractJSFCRUDMB
 	
     /**
      * <p>
-     *   Considere que a classe que estende AbstractContoller seja C, todo C deve estar associado a 
-     *   uma subclasse de AbstractDAO DAO e ambas, C e DAO, tenham uma classe entidade E como tipo 
+     *   Considere que a classe que estende AbstractMB seja MB. Todo MB deve estar associado a 
+     *   uma subclasse de AbstractDAO DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
      *   parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD tipo E 
-     *   que C necessitar.
+     *   que MB necessitar.
      * </p>
      */
     @Inject
@@ -67,7 +67,7 @@ public abstract class AbstractJSFCRUDMB
     
 	/**
      * <p>
-     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do controller. 
+     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do managed bean. 
      *   Geralmente usado para se obter nome desta classe.
      * </p>
      */
@@ -76,8 +76,8 @@ public abstract class AbstractJSFCRUDMB
 	/**
 	 * <p>
 	 *   Atributo que mapeia a entidade E, alvo das operações de CRUD. Recebe os valores dos 
-	 *   formulários de criação e edição das repectivas views JSF e serve como entidade a ser incida 
-	 *   sobre apenas uma entidade E deve usar selected.
+	 *   formulários de criação e edição das repectivas views JSF e serve como entidade a ser 
+	 *   persistida no DAO.
 	 * </p>  
 	 * <p>
 	 *   O valor inicial de selected é obtido via parâmetro URL id que mapeia o ID da instância do 
@@ -181,7 +181,8 @@ public abstract class AbstractJSFCRUDMB
 
 	/**
 	 * <p>
-	 *   Retorna a lista de todas as entidades E presentes no atributo all sem forçar a releitura.
+	 *   Retorna a lista de todas as entidades E presentes para o atributo all sem forçar a 
+	 *   releitura.
 	 * </p>
 	 * @return Lista com todas as entidades E presentes na última leitura feita no datasource.
 	 */
@@ -193,7 +194,7 @@ public abstract class AbstractJSFCRUDMB
 	 * <p>
 	 *   Se refresh for verdadeiro ou o atributo all for null, força a leitura desta lista no 
 	 *   datasource e armazena-a em all; caso contrário, mantém all em seu estado atual, ou seja, 
-	 *   all terá a lista da última leitura feita no datasource. Apoś isso, retorna all.
+	 *   all terá a lista da última leitura feita no datasource. Após isso, retorna all.
 	 * </p>
 	 * @return Lista com todas as entidades E presentes no atributo all.
 	 */
@@ -220,8 +221,8 @@ public abstract class AbstractJSFCRUDMB
 
 	/**
      * <p>
-     *   Trata a integridade de selected, insere-o no datasource e redireciona à view posterior 
-     *   descrita em nextPath.
+     *   Trata a integridade de selected, solicita ao DAO que insira no datasource e redireciona à 
+     *   view posterior descrita em nextPath.
      *  </p>
      * @param nextPath caminho para o qual a ação será direcionada após a operação de persistência.
      * @return nextPath ou o caminho padrão por omissão. O ciclo de vida do JSF espera que seja 
@@ -249,8 +250,8 @@ public abstract class AbstractJSFCRUDMB
 	
     /**
      * <p>
-     *   Trata a integridade de selected, insere-o no datasource e redireciona à view padrão após a 
-     *   operação.
+     *   Trata a integridade de selected, solicita ao DAO que insira no datasource e redireciona à 
+     *   view padrão após a operação.
      * </p>
      * @return caminho padrão de redirecionamento. O ciclo de vida do JSF espera que seja retornada 
      *   uma String com este caminho.
@@ -261,9 +262,9 @@ public abstract class AbstractJSFCRUDMB
 
 	/**
 	 * <p>
-     *   Trata a integridade de selected, insere-o no datasource e realiza a operação. O termo Only 
-     *   se refere ao fato de que somente a inserção da entidade será realizada, sem qualquer 
-     *   redirecionamento a outra view.
+     *   Trata a integridade de selected, solicita ao DAO que insira no datasource e realiza a 
+     *   operação. O termo Only se refere ao fato de que somente a inserção da entidade será 
+     *   realizada, sem qualquer redirecionamento a outra view.
      * </p>
      */
 	public void createOnly() {
@@ -287,8 +288,8 @@ public abstract class AbstractJSFCRUDMB
     
 	/**
 	 * <p>
-     *   Trata a integridade de selected, atualiza-o no datasource e redireciona à view posterior 
-     *   descrita em nextPath.
+     *   Trata a integridade de selected, solicita ao DAO que atualize no datasource e redireciona 
+     *   à view posterior descrita em nextPath.
      * </p>
      * @param nextPath caminho para o qual a ação será direcionada após a operação de persistência.
      * @return nextPath ou o caminho padrão por omissão. O ciclo de vida do JSF espera que seja 
@@ -317,8 +318,8 @@ public abstract class AbstractJSFCRUDMB
     
     /**
      * <p>
-     *   Trata a integridade de selected, atualiza-o no datasource e redireciona à view padrão após 
-     *   a operação.
+     *   Trata a integridade de selected, solicita ao DAO que atualize no datasource e redireciona 
+     *   à view padrão após a operação.
      * </p>
      * @return caminho padrão de redirecionamento. O ciclo de vida do JSF espera que seja retornada 
      *   uma String com este caminho.
@@ -329,9 +330,9 @@ public abstract class AbstractJSFCRUDMB
     
     /**
      * <p>
-     *   Trata a integridade de selected, atualiza-o no datasource e redireciona à view posterior 
-     *   descrita em nextPath. A diferença para edit(nextPath) é que nenhuma mensagem de confirmação 
-     *   é exibida aqui.
+     *   Trata a integridade de selected, solicita ao DAO que atualize no datasource e redireciona 
+     *   à view posterior descrita em nextPath. A diferença para edit(nextPath) é que nenhuma 
+     *   mensagem de confirmação é exibida aqui.
      * </p>
      * @param nextPath caminho para o qual a ação será direcionada após a operação de persistência.
      * @return nextPath ou o caminho padrão por omissão. O ciclo de vida do JSF espera que seja 
@@ -360,8 +361,9 @@ public abstract class AbstractJSFCRUDMB
     
     /**
      * <p>
-     *   Trata a integridade de selected, atualiza-o no datasource e redireciona à view padrão após 
-     *   a operação. A diferença para edit() é que nenhuma mensagem de confirmação é exibida aqui.
+     *   Trata a integridade de selected, solicita ao DAO que atualize no datasource e redireciona 
+     *   à view padrão após a operação. A diferença para edit() é que nenhuma mensagem de 
+     *   confirmação é exibida aqui.
      * </p>
      * @return caminho padrão de redirecionamento. O ciclo de vida do JSF espera que seja retornada 
      *   uma String com este caminho.
@@ -372,8 +374,8 @@ public abstract class AbstractJSFCRUDMB
 
     /**
      * <p>
-     *   Trata a integridade de selected, remove-o do datasource e redireciona à view posterior 
-     *   descrita em nextPath.
+     *   Trata a integridade de selected, solicita ao DAO que remova no datasource e redireciona à 
+     *   view posterior descrita em nextPath.
      * </p>
      * @param nextPath caminho para o qual a ação será direcionada após a operação de persistência.
      * @return nextPath ou o caminho padrão por omissão. O ciclo de vida do JSF espera que seja 
@@ -396,8 +398,8 @@ public abstract class AbstractJSFCRUDMB
     
     /**
      * <p>
-     *   Trata a integridade de selected, remove-o do datasource e redireciona à view padrão após a 
-     *   operação.
+     *   Trata a integridade de selected, solicita ao DAO que remova no datasource e redireciona à 
+     *   view padrão após a operação.
      * </p>
      * @return caminho padrão de redirecionamento. O ciclo de vida do JSF espera que seja retornada 
      *   uma String com este caminho.
@@ -450,24 +452,81 @@ public abstract class AbstractJSFCRUDMB
 	 * --------------------------------------------------------------------------------------------
 	 */
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a visualização das entidades 
+     *   armazenadas em all. Destinado a ser usado principalmente nas views JSF.
+     * </p>
+     * @return Permissão para visualização das entidades armazenadas em all
+     */
     public abstract boolean canViewAll();
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a visualização de uma entidade
+     *   específica do tipo E. Destinado a ser usado principalmente nas views JSF.
+     * </p>
+     * @return Permissão para visualização de uma entidade específica do tipo E
+     */
     public abstract boolean canView(E selected);
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a criação da entidade 
+     *   newSelected. Destinado a ser usado principalmente nas views JSF, mas é usado também nos 
+     *   métodos create.
+     * </p>
+     * @return Permissão para criação de newSelected
+     */
     public abstract boolean canCreate();
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a edição de uma entidade
+     *   específica do tipo E. Destinado a ser usado principalmente nas views JSF.
+     * </p>
+     * @return Permissão para edição de uma entidade específica do tipo E
+     */
     public abstract boolean canEdit(E selected);
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a remoção de uma entidade
+     *   específica do tipo E. Destinado a ser usado principalmente nas views JSF.
+     * </p>
+     * @return Permissão para remoção de uma entidade específica do tipo E
+     */
     public abstract boolean canRemove(E selected);
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a visualização de selected. 
+     *   Destinado a ser usado principalmente nas views JSF.
+     * </p>
+     * @return Permissão para visualização de selected
+     */
     public boolean canView() {
     	return canView(getSelected());
     }
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a edição de selected. 
+     *   Destinado a ser usado principalmente nas views JSF, mas é usado também nos métodos edit.
+     * </p>
+     * @return Permissão para edição de selected
+     */
     public boolean canEdit() {
     	return canEdit(getSelected());
     }
     
+    /**
+     * <p>
+     *   Filtro que possibilita o managed bean permitir ou proibir a remoção de selected. 
+     *   Destinado a ser usado principalmente nas views JSF, mas é usado também nos métodos remove.
+     * </p>
+     * @return Permissão para remoção de selected
+     */
     public boolean canRemove() {
     	return canRemove(getSelected());
     }

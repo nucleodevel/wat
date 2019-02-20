@@ -18,7 +18,7 @@ import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 /**
  * <p>
  *   Subclasse abstrata de AbstractDAO que implementa o comportamento padrão de um DAO que opera 
- *   sobre um datasource do tipo banco de dados.
+ *   sobre um datasource que é um banco de dados acessado via JPA.
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em uma base de um banco de dados.
@@ -59,8 +59,8 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 
     /**
      * <p>
-     *   Cada subclasse deve indicar o nome da unidade de persistência que será utilizada por {@link 
-     *   #entityManager entityManager}.
+     *   Cada subclasse deve indicar o nome da unidade de persistência que será utilizada por 
+     *   {@link #entityManager entityManager}.
      * </p>
      * @return Nome da unidade de persistência que {@link #entityManager entityManager} usa para 
      *   realizar as operações de persistência.
@@ -84,7 +84,9 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	}
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByUniqueParams(java.util.Map)
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByUniqueParams(
+     * 	   java.util.Map
+     * )
      */
     @Override
 	public List<E> selectAllByUniqueParams(Map<String, Object> params) {
@@ -192,7 +194,9 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#insert(org.nucleodevel.webapptemplate.entity.AbstractEntity)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#insert(
+	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
+	 * )
 	 */
 	@Override
     public E insert(E entity) {
@@ -203,7 +207,9 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#update(org.nucleodevel.webapptemplate.entity.AbstractEntity)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#update(
+	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
+	 * )
 	 */
 	@Override
     public E update(E entity) {
@@ -214,7 +220,9 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#delete(org.nucleodevel.webapptemplate.entity.AbstractEntity)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#delete(
+	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
+	 * )
 	 */
 	@Override
     public E delete(E entity) {

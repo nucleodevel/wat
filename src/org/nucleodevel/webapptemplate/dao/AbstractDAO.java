@@ -12,12 +12,8 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 /**
  * <p>
  *   Classe abstrata que implementa o comportamento padrão de um DAO que provê acesso ao modelo de 
- *   dados nos sistemas que usam webapptemplate. Ela realiza a persistência de entidades do tipo 
- *   parâmetro E em conjunto com uma classe controller do tipo AbstractJSFMB ou um datasource 
- *   que repassa a persistência de dados para outro datasource. O fluxo normal é: a classe 
- *   solicitante possui um método que recebe dados de busca ou de uma entidade E e envia estes dados 
- *   para um método do DAO para que este realize as operações de persistência necessárias e retorne 
- *   a informação necessária.   
+ *   dados nos sistemas que usam webapptemplate. Ela provê acesso a um datasource, que pode um SGBD
+ *   ou um WebService, e repassa a esses as operações de persistência necessárias.
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
@@ -92,11 +88,11 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 	
     /**
 	 * <p>
-	 *   Método usado antes das operações de inserção e atualização na persistência para evitar que 
+	 *   Método usado antes das operações de inserção e atualização no datasource para evitar que 
 	 *   uma entidade não única seja persistida e cause algum erro. A indicação isInsert é 
-	 *   necessária porque se é desejado uma edição, a busca pode retornar a própria entidade se não 
-	 *   houve alteração dos parâmetros unique originais. Assim, é possível indicar que esta busca 
-	 *   pode ser ignorada.
+	 *   necessária porque se é desejado uma edição, a busca pode retornar a própria entidade se 
+	 *   não houve alteração dos parâmetros unique originais. Assim, é possível indicar que esta 
+	 *   busca pode ser ignorada.
 	 * </p>
 	 * @param entity Entidade E cuja unicidade será testada.
 	 * @param isInsert Indica se a entidade será inserida ou editada no datasource. Essa informação 
@@ -166,7 +162,7 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
     
     /**
      * <p>
-     *   Retorna o número de entidades E existentes na persistência.
+     *   Retorna o número de entidades E existentes no datasource.
      * </p>
      * @return Número total de entidades E existentes  
      */
@@ -178,9 +174,9 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 	 * <p>
 	 *   Obtém a entidade E cujo ID é aquele passado por parâmetro.
 	 * </p>
-	 * @param id ID da instância que será fornecida pela persistência.
-	 * @return Instância cujo ID foi passado por parâmetro ou nulo, se não existir instância com tal 
-	 *   ID.
+	 * @param id ID da instância que será fornecida pelo datasource.
+	 * @return Instância cujo ID foi passado por parâmetro ou nulo, se não existir instância com 
+	 *   tal ID.
 	 */
 	public abstract E selectOne(Object id);
 	
@@ -196,7 +192,7 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 	 * <p>
 	 *   Método que realiza a inserção da entidade no datasource.
 	 * </p>
-	 * @param entity Entidade que será inserida na persitência.
+	 * @param entity Entidade que será inserida no datasource.
 	 */
 	public abstract E insert(E entity);
 
@@ -204,7 +200,7 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 	 * <p>
 	 *   Método que realiza a atualização da entidade no datasource.
 	 * </p>
-	 * @param entity Entidade que será inserida na persitência.
+	 * @param entity Entidade que será inserida no datasource.
 	 */
 	public abstract E update(E entity);
 
@@ -212,7 +208,7 @@ public abstract class AbstractDAO<E extends AbstractEntity<?>> {
 	 * <p>
 	 *   Método que realiza a remoção da entidade no datasource.
 	 * </p>
-	 * @param entity Entidade que será inserida na persitência.
+	 * @param entity Entidade que será inserida no datasource.
 	 */
 	public abstract E delete(E entity);
 	

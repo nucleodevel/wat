@@ -123,7 +123,9 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#insert(org.nucleodevel.webapptemplate.entity.AbstractEntity)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#insert(
+	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
+	 * )
 	 */
 	@Override
 	public E insert(E entity) {
@@ -134,7 +136,9 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#update(org.nucleodevel.webapptemplate.entity.AbstractEntity)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#update(
+	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
+	 * )
 	 */
 	@Override
 	public E update(E entity) {
@@ -145,7 +149,9 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#delete(org.nucleodevel.webapptemplate.entity.AbstractEntity)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#delete(
+	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
+	 * )
 	 */
 	@Override
 	public E delete(E entity) {

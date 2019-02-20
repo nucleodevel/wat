@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 
 /**
  * <p>
- *   Implementa diversas funcionalidades úteis de URL a serem invocadas pelos controllers.
+ *   Implementa diversas funcionalidades úteis de URL a serem invocadas pelos managed beans.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -62,8 +62,8 @@ public class URLUtils {
     
     /**
      * <p>
-     *   Tenta obter o valor de um parâmetro passado via URL e trata-o como um Date. Retorna o valor 
-     *   ou nulo, se tal parâmetro não foi encontrado. 
+     *   Tenta obter o valor de um parâmetro passado via URL e trata-o como um Date. Retorna o 
+     *   valor ou nulo, se tal parâmetro não foi encontrado. 
      * </p>
      * @param param Nome do parâmetro passado via URL.
      * @return Date com o valor do parâmetro passado via URL.
