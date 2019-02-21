@@ -17,7 +17,7 @@ import javax.naming.NamingException;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public class VariableUtils {
+public class JSFVariableUtils {
 	
 	
 	/* 

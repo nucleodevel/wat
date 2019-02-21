@@ -12,10 +12,10 @@ import org.nucleodevel.webapptemplate.dao.AbstractDAO;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
 import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
+import org.nucleodevel.webapptemplate.util.JSFURLUtils;
+import org.nucleodevel.webapptemplate.util.JSFVariableUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 import org.nucleodevel.webapptemplate.util.PersistAction;
-import org.nucleodevel.webapptemplate.util.URLUtils;
-import org.nucleodevel.webapptemplate.util.VariableUtils;
 
 /**
  * <p>
@@ -126,7 +126,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public E getSelected() {
 		if (selected == null) {
-			String idString = URLUtils.getURLStringParam("id");
+			String idString = JSFURLUtils.getURLStringParam("id");
     		
 			E newEntity = getDao().getNewEntityInstance();
     		String entityIdClass = newEntity.getEntityIdClass().getSimpleName();
@@ -230,7 +230,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String create(String nextPath) {
     	if (!canCreate()) {
-    		VariableUtils.addErrorMessage("can.error.generic");
+    		JSFVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -239,7 +239,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), true)) {
-			VariableUtils.addErrorMessage(
+			JSFVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -269,7 +269,7 @@ public abstract class AbstractJSFCRUDMB
      */
 	public void createOnly() {
     	if (!canCreate()) {
-    		VariableUtils.addErrorMessage("can.error.generic");
+    		JSFVariableUtils.addErrorMessage("can.error.generic");
 			return;
     	}
     	
@@ -278,7 +278,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
         if (!getDao().isAnUniqueEntity(getSelected(), true)) {
-			VariableUtils.addErrorMessage(
+			JSFVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return;
@@ -297,7 +297,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String edit(String nextPath) {
     	if (!canEdit()) {
-    		VariableUtils.addErrorMessage("can.error.generic");
+    		JSFVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -306,7 +306,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
-			VariableUtils.addErrorMessage(
+			JSFVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -340,7 +340,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String editWithoutMessage(String nextPath) {
     	if (!canEdit()) {
-    		VariableUtils.addErrorMessage("can.error.generic");
+    		JSFVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -349,7 +349,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
-			VariableUtils.addErrorMessage(
+			JSFVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -383,7 +383,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String remove(String nextPath) {  
     	if (!canRemove()) {
-    		VariableUtils.addErrorMessage("can.error.generic");
+    		JSFVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -427,7 +427,7 @@ public abstract class AbstractJSFCRUDMB
             	else if (persistAction == PersistAction.DELETE)
             		getDao().delete(selected);
             	if (successMessage != null)
-            		VariableUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
+            		JSFVariableUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -435,9 +435,9 @@ public abstract class AbstractJSFCRUDMB
                     msg = cause.getLocalizedMessage();
                 }
                 if (msg.length() > 0) {
-                    VariableUtils.addErrorMessage(RESOURCE_APP_MSG, msg);
+                    JSFVariableUtils.addErrorMessage(RESOURCE_APP_MSG, msg);
                 } else {
-                	VariableUtils.addErrorMessage(ex, "persistence.error.generic");
+                	JSFVariableUtils.addErrorMessage(ex, "persistence.error.generic");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

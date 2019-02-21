@@ -1,9 +1,6 @@
 package org.nucleodevel.webapptemplate.session;
 
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
-import org.nucleodevel.webapptemplate.util.ServletUtils;
 
 /**
  * <p>
@@ -29,16 +26,11 @@ public abstract class AbstractSessionDAO {
     /**
 	 * @return Atual HttpSession do usuário autenticado
 	 */
-	protected HttpSession getSession() {
-        return 
-        	(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-    }
+	protected abstract HttpSession getSession();
 	
 	/**
 	 * @return Indica se o dispositivo que está acessando o sistema é móvel. 
 	 */
-	public boolean isMobile() {
-		return ServletUtils.isMobile();
-	}
+	public abstract boolean isMobile();
 	
 }

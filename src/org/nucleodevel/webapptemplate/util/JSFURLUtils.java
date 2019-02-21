@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public class URLUtils {
+public class JSFURLUtils {
 	
 	
 	/* 
