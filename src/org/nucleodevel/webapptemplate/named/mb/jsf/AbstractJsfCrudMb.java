@@ -84,7 +84,7 @@ public abstract class AbstractJsfCrudMb
 	 *   tipo E. Se não há parâmetro id, selected é nulo.
 	 * </p>  
 	 */
-	private E selected;
+	protected E selected;
 	
 	/**
 	 * <p>
