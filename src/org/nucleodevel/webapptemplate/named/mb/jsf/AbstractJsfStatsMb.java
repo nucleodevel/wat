@@ -5,11 +5,11 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import org.nucleodevel.webapptemplate.dao.AbstractDAO;
+import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
-import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
-import org.nucleodevel.webapptemplate.util.JSFURLUtils;
+import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
+import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
+import org.nucleodevel.webapptemplate.util.JsfUrlUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
@@ -22,9 +22,9 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * @param <DAO> classe DAO que apóia o managed bean.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
-public abstract class AbstractJSFStatsMB
-	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO>
-	extends AbstractMB<SDAO> 
+public abstract class AbstractJsfStatsMb
+	<E extends AbstractEntity<?>, DAO extends AbstractDao<E>, SDAO extends AbstractSessionDao>
+	extends AbstractMb<SDAO> 
 	implements Serializable {
 	
 	
@@ -39,8 +39,8 @@ public abstract class AbstractJSFStatsMB
 	
     /**
      * <p>
-     *   Considere que a classe que estende AbstractMB seja MB. Todo MB deve estar associado a 
-     *   uma subclasse de AbstractDAO DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
+     *   Considere que a classe que estende AbstractMb seja MB. Todo MB deve estar associado a 
+     *   uma subclasse de AbstractDao DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
      *   parametrizado. DAO será responsável por efetivamente realizar as operações no datasource  
      *   que MB necessitar.
      * </p>
@@ -113,7 +113,7 @@ public abstract class AbstractJSFStatsMB
      */
     public Date getBegin() {
     	if (begin == null)
-    		begin = JSFURLUtils.getURLDateParam("begin");
+    		begin = JsfUrlUtils.getUrlDateParam("begin");
 		return begin;
 	}
 
@@ -128,7 +128,7 @@ public abstract class AbstractJSFStatsMB
      */
     public Date getEnd() {
 		if (end == null)
-			end = JSFURLUtils.getURLDateParam("end");
+			end = JsfUrlUtils.getUrlDateParam("end");
 		return end;
 	}
 

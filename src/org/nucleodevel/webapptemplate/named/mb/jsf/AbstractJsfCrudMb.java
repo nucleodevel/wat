@@ -8,12 +8,12 @@ import java.util.logging.Logger;
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 
-import org.nucleodevel.webapptemplate.dao.AbstractDAO;
+import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
-import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
-import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
-import org.nucleodevel.webapptemplate.util.JSFURLUtils;
-import org.nucleodevel.webapptemplate.util.JSFVariableUtils;
+import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
+import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
+import org.nucleodevel.webapptemplate.util.JsfUrlUtils;
+import org.nucleodevel.webapptemplate.util.JsfVariableUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 import org.nucleodevel.webapptemplate.util.PersistAction;
 
@@ -21,9 +21,9 @@ import org.nucleodevel.webapptemplate.util.PersistAction;
  * <p>
  *   Classe abstrata que implementa o comportamento padrão de um managed bean MVC nos sistemas que 
  *   usam webapptemplate. Ela controla o fluxo das operações de CRUD sobre as entidades do tipo E 
- *   e realiza a persistência dessas entidades em conjunto com uma classe DAO do tipo AbstractDAO, 
+ *   e realiza a persistência dessas entidades em conjunto com uma classe DAO do tipo AbstractDao, 
  *   que pertence ao modelo de dados e efetivamente realiza as operações no datasource. Este 
- *   managed bean também depende de uma classe DAO de sessão SDAO, que extende AbstractSessionDAO, 
+ *   managed bean também depende de uma classe DAO de sessão SDAO, que extende AbstractSessionDao, 
  *   para obter os dados da sessão do sistema ao qual o managed bean pertence.
  * </p>
  * <p>
@@ -39,9 +39,9 @@ import org.nucleodevel.webapptemplate.util.PersistAction;
  * @param <DAO> classe DAO que apóia o managed bean.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
-public abstract class AbstractJSFCRUDMB
-	<E extends AbstractEntity<?>, DAO extends AbstractDAO<E>, SDAO extends AbstractSessionDAO>
-	extends AbstractMB<SDAO> 
+public abstract class AbstractJsfCrudMb
+	<E extends AbstractEntity<?>, DAO extends AbstractDao<E>, SDAO extends AbstractSessionDao>
+	extends AbstractMb<SDAO> 
 	implements Serializable {
 	
 	
@@ -56,8 +56,8 @@ public abstract class AbstractJSFCRUDMB
 	
     /**
      * <p>
-     *   Considere que a classe que estende AbstractMB seja MB. Todo MB deve estar associado a 
-     *   uma subclasse de AbstractDAO DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
+     *   Considere que a classe que estende AbstractMb seja MB. Todo MB deve estar associado a 
+     *   uma subclasse de AbstractDao DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
      *   parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD tipo E 
      *   que MB necessitar.
      * </p>
@@ -126,7 +126,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public E getSelected() {
 		if (selected == null) {
-			String idString = JSFURLUtils.getURLStringParam("id");
+			String idString = JsfUrlUtils.getUrlStringParam("id");
     		
 			E newEntity = getDao().getNewEntityInstance();
     		String entityIdClass = newEntity.getEntityIdClass().getSimpleName();
@@ -230,7 +230,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String create(String nextPath) {
     	if (!canCreate()) {
-    		JSFVariableUtils.addErrorMessage("can.error.generic");
+    		JsfVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -239,7 +239,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), true)) {
-			JSFVariableUtils.addErrorMessage(
+			JsfVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -269,7 +269,7 @@ public abstract class AbstractJSFCRUDMB
      */
 	public void createOnly() {
     	if (!canCreate()) {
-    		JSFVariableUtils.addErrorMessage("can.error.generic");
+    		JsfVariableUtils.addErrorMessage("can.error.generic");
 			return;
     	}
     	
@@ -278,7 +278,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
         if (!getDao().isAnUniqueEntity(getSelected(), true)) {
-			JSFVariableUtils.addErrorMessage(
+			JsfVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return;
@@ -297,7 +297,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String edit(String nextPath) {
     	if (!canEdit()) {
-    		JSFVariableUtils.addErrorMessage("can.error.generic");
+    		JsfVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -306,7 +306,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
-			JSFVariableUtils.addErrorMessage(
+			JsfVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -340,7 +340,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String editWithoutMessage(String nextPath) {
     	if (!canEdit()) {
-    		JSFVariableUtils.addErrorMessage("can.error.generic");
+    		JsfVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -349,7 +349,7 @@ public abstract class AbstractJSFCRUDMB
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
-			JSFVariableUtils.addErrorMessage(
+			JsfVariableUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -383,7 +383,7 @@ public abstract class AbstractJSFCRUDMB
      */
     public String remove(String nextPath) {  
     	if (!canRemove()) {
-    		JSFVariableUtils.addErrorMessage("can.error.generic");
+    		JsfVariableUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -427,7 +427,7 @@ public abstract class AbstractJSFCRUDMB
             	else if (persistAction == PersistAction.DELETE)
             		getDao().delete(selected);
             	if (successMessage != null)
-            		JSFVariableUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
+            		JsfVariableUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -435,9 +435,9 @@ public abstract class AbstractJSFCRUDMB
                     msg = cause.getLocalizedMessage();
                 }
                 if (msg.length() > 0) {
-                    JSFVariableUtils.addErrorMessage(RESOURCE_APP_MSG, msg);
+                    JsfVariableUtils.addErrorMessage(RESOURCE_APP_MSG, msg);
                 } else {
-                	JSFVariableUtils.addErrorMessage(ex, "persistence.error.generic");
+                	JsfVariableUtils.addErrorMessage(ex, "persistence.error.generic");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

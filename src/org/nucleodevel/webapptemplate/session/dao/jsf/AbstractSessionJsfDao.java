@@ -3,8 +3,8 @@ package org.nucleodevel.webapptemplate.session.dao.jsf;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
-import org.nucleodevel.webapptemplate.util.JSFServletUtils;
+import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
+import org.nucleodevel.webapptemplate.util.JsfServletUtils;
 
 /**
  * <p>
@@ -12,7 +12,7 @@ import org.nucleodevel.webapptemplate.util.JSFServletUtils;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public abstract class AbstractSessionJSFDAO extends AbstractSessionDAO {
+public abstract class AbstractSessionJsfDao extends AbstractSessionDao {
 	
 	
 	/* 
@@ -23,7 +23,7 @@ public abstract class AbstractSessionJSFDAO extends AbstractSessionDAO {
     
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.session.AbstractSessionDAO#getSession()
+     * @see org.nucleodevel.webapptemplate.session.AbstractSessionDao#getSession()
      */
     protected HttpSession getSession() {
         return 
@@ -31,10 +31,10 @@ public abstract class AbstractSessionJSFDAO extends AbstractSessionDAO {
     }
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.session.AbstractSessionDAO#isMobile()
+	 * @see org.nucleodevel.webapptemplate.session.AbstractSessionDao#isMobile()
 	 */
 	public boolean isMobile() {
-		return JSFServletUtils.isMobile();
+		return JsfServletUtils.isMobile();
 	}
 	
 }

@@ -13,12 +13,12 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
-import org.nucleodevel.webapptemplate.dao.AbstractDAO;
+import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 
 /**
  * <p>
- *   Subclasse abstrata de AbstractDAO que implementa o comportamento padrão de um DAO que opera 
+ *   Subclasse abstrata de AbstractDao que implementa o comportamento padrão de um DAO que opera 
  *   sobre um datasource do tipo webservice. Na terminologia de webservices, seria um cliente de 
  *   webservice, que obtém os dados de um servidor.   
  * </p>
@@ -26,7 +26,7 @@ import org.nucleodevel.webapptemplate.entity.AbstractEntity;
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade XML ou Json resultante de uma 
  *   operação de webservice.
  */
-public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends AbstractDAO<E> {
+public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends AbstractDao<E> {
 	
 	
 	/* 
@@ -55,19 +55,19 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
     	if (service == null) {
     		ClientConfig config = new ClientConfig();
     		Client client = ClientBuilder.newClient(config).register(MultiPartFeature.class);
-    	    service = client.target(UriBuilder.fromUri(getServerURL()).build());
+    	    service = client.target(UriBuilder.fromUri(getServerUrl()).build());
     	}
 		return service;
 	}
 	
 	/**
      * <p>
-     *   Cada subclasse deve indicar a URL so servidor que provê o webservice. Esta URL será usada 
+     *   Cada subclasse deve indicar a URL do servidor que provê o webservice. Esta URL será usada 
      *   para iniciar {@link #service service}.
      * </p>
      * @return URL do servidor que provê o webservice.
      */
-    public abstract String getServerURL();
+    public abstract String getServerUrl();
 	
     /**
      * <p>
@@ -86,7 +86,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAll()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAll()
      */
     @Override
 	public List<E> selectAll() {
@@ -95,7 +95,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByRange(int[])
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAllByRange(int[])
 	 */
 	@Override
     public List<E> selectAllByRange(int[] range) {    	
@@ -103,7 +103,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectOne(java.lang.Object)
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectOne(java.lang.Object)
 	 */
 	@Override
 	public E selectOne(Object id) {
@@ -123,7 +123,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#insert(
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#insert(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -136,7 +136,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#update(
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#update(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -149,7 +149,7 @@ public abstract class AbstractRESTClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#delete(
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#delete(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */

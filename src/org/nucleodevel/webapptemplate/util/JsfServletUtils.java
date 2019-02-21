@@ -16,7 +16,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public class JSFServletUtils {
+public class JsfServletUtils {
 	
 	
 	/* 

@@ -2,8 +2,8 @@ package org.nucleodevel.webapptemplate.named.mb.jsf;
 
 import java.io.Serializable;
 
-import org.nucleodevel.webapptemplate.named.mb.AbstractMB;
-import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
+import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
+import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
 
 /**
  * <p>
@@ -14,8 +14,8 @@ import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
  * @param <DAO> classe DAO que apóia o managed bean.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
-public abstract class AbstractJSFSimpleMB<SDAO extends AbstractSessionDAO>
-	extends AbstractMB<SDAO> 
+public abstract class AbstractJsfSimpleMb<SDAO extends AbstractSessionDao>
+	extends AbstractMb<SDAO> 
 	implements Serializable {
 	
 	

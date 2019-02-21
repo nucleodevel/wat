@@ -9,13 +9,13 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.nucleodevel.webapptemplate.dao.AbstractDAO;
+import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**<p>
  *   Classe utilizada pelo JSF para recuperar uma instância do tipo E a partir da string que contém 
- *   o valor do identificador desta instância. A classe DAO, subclasse de AbstractDAO, é a classe 
+ *   o valor do identificador desta instância. A classe DAO, subclasse de AbstractDao, é a classe 
  *   que obtém entidades do tipo E do datasource.
  * </p>
  * <p>  
@@ -29,7 +29,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  */
 @SuppressWarnings("rawtypes")
 @Named
-public abstract class AbstractJSFConverter<E extends AbstractEntity<?>, DAO extends AbstractDAO<?>> 
+public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO extends AbstractDao<?>> 
 	implements Converter {
 	
 	
@@ -42,8 +42,8 @@ public abstract class AbstractJSFConverter<E extends AbstractEntity<?>, DAO exte
     
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractJSFConverter seja C,todo C deve estar associado 
-     *   a uma subclasse de AbstractDAO DAO e ambas, C e DAO, tenham uma classe entidade E como 
+     *   Considere que a classe que estende AbstractJsfConverter seja C,todo C deve estar associado 
+     *   a uma subclasse de AbstractDao DAO e ambas, C e DAO, tenham uma classe entidade E como 
      *   tipo parametrizado. DAO será responsável por fornecer instâncias do tipo E que C 
      *   necessitar.
      * </p>

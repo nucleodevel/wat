@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
+import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import org.nucleodevel.webapptemplate.session.AbstractSessionDAO;
  * @author Dallan Augusto Toledo Reis
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
-public abstract class AbstractMB<SDAO extends AbstractSessionDAO> implements Serializable {
+public abstract class AbstractMb<SDAO extends AbstractSessionDao> implements Serializable {
 	
 	
 	/* 
@@ -36,13 +36,13 @@ public abstract class AbstractMB<SDAO extends AbstractSessionDAO> implements Ser
 	
 	/**
 	 * <p>
-     *   Considere que a classe que estende AbstractMB seja MB e ela seja parte de um sistema 
+     *   Considere que a classe que estende AbstractMb seja MB e ela seja parte de um sistema 
      *   (projeto) S. Todo sistema S deve implementar uma classe DAO de sessão SDAO que estenda a 
-     *   classe AbstractSessionDAO.
+     *   classe AbstractSessionDao.
      * </p>
 	 */
     @Inject
-	private SDAO sessionDAO;
+	private SDAO sessionDao;
 	
 	
 	/* 
@@ -51,8 +51,8 @@ public abstract class AbstractMB<SDAO extends AbstractSessionDAO> implements Ser
 	 * --------------------------------------------------------------------------------------------
 	 */
     
-    public SDAO getSessionDAO() {
-		return sessionDAO;
+    public SDAO getSessionDao() {
+		return sessionDao;
 	}
     
 }

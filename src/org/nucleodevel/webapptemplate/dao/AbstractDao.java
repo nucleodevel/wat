@@ -18,7 +18,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
  */
-public abstract class AbstractDAO<E extends AbstractEntity<?>> {
+public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
 	
 	/* 

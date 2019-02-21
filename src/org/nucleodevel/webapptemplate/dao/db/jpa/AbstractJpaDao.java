@@ -12,18 +12,18 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
-import org.nucleodevel.webapptemplate.dao.AbstractDAO;
+import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 
 /**
  * <p>
- *   Subclasse abstrata de AbstractDAO que implementa o comportamento padrão de um DAO que opera 
+ *   Subclasse abstrata de AbstractDao que implementa o comportamento padrão de um DAO que opera 
  *   sobre um datasource que é um banco de dados acessado via JPA.
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em uma base de um banco de dados.
  */
-public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends AbstractDAO<E> {
+public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends AbstractDao<E> {
 	
 	
 	/* 
@@ -76,7 +76,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAll()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAll()
      */
     @Override
 	public List<E> selectAll() {
@@ -84,7 +84,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	}
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByUniqueParams(
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAllByUniqueParams(
      * 	   java.util.Map
      * )
      */
@@ -94,7 +94,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectAllByRange(int[])
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAllByRange(int[])
 	 */
 	@Override
     public List<E> selectAllByRange(int[] range) {    	
@@ -107,7 +107,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectCount()
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectCount()
      */
     @Override
     public int selectCount() {
@@ -119,7 +119,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#selectOne(java.lang.Object)
+     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectOne(java.lang.Object)
      */
     @Override
 	public E selectOne(Object id) {
@@ -194,7 +194,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
 	
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#insert(
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#insert(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -207,7 +207,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#update(
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#update(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -220,7 +220,7 @@ public abstract class AbstractJPADAO<E extends AbstractEntity<?>> extends Abstra
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDAO#delete(
+	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#delete(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */

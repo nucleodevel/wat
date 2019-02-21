@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public class JSFURLUtils {
+public class JsfUrlUtils {
 	
 	
 	/* 
@@ -31,7 +31,7 @@ public class JSFURLUtils {
      * @param param Nome do parâmetro passado via URL.
      * @return String com o valor do parâmetro passado via URL.
      */
-    public static String getURLStringParam(String param) {
+    public static String getUrlStringParam(String param) {
     	String value = 
     		"" 
     		+ FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
@@ -49,7 +49,7 @@ public class JSFURLUtils {
      * @param param Nome do parâmetro passado via URL.
      * @return Long com o valor do parâmetro passado via URL.
      */
-    public static Long getURLLongParam(String param) {
+    public static Long getUrlLongParam(String param) {
     	try {
 	    	return Long.parseLong(
 	    		FacesContext.getCurrentInstance().getExternalContext()
@@ -68,8 +68,8 @@ public class JSFURLUtils {
      * @param param Nome do parâmetro passado via URL.
      * @return Date com o valor do parâmetro passado via URL.
      */
-    public static Date getURLDateParam(String param) {
-    	String strValue = getURLStringParam(param); 
+    public static Date getUrlDateParam(String param) {
+    	String strValue = getUrlStringParam(param); 
 		if (strValue != null) {
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			try {

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public abstract class AbstractSessionDAO {
+public abstract class AbstractSessionDao {
 	
 	
 	/* 

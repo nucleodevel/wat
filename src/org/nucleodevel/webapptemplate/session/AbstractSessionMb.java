@@ -9,7 +9,7 @@ import javax.inject.Inject;
  * <p>
  *   Classe abstrata que implementa o comportamento padrão de um managed bean de sessão nos 
  *   sistemas que usam webapptemplate. Ela fornece um meio das views acessarem os dados de sessão 
- *   via a classe DAO do tipo AbstractSessionDAO, que fornece esse meio de acessar as variáveis de 
+ *   via a classe DAO do tipo AbstractSessionDao, que fornece esse meio de acessar as variáveis de 
  *   sessão.
  * </p>
  * <p>
@@ -18,7 +18,7 @@ import javax.inject.Inject;
  * @author Dallan Augusto Toledo Reis
  * @param <DAO> classe DAO que apóia este managed bean.
  */
-public abstract class AbstractSessionMB<DAO extends AbstractSessionDAO> 
+public abstract class AbstractSessionMb<DAO extends AbstractSessionDao> 
 	implements Serializable {
 	
 	
@@ -33,9 +33,9 @@ public abstract class AbstractSessionMB<DAO extends AbstractSessionDAO>
     
     /**
 	 * <p>
-     *   Considere que a classe que estende AbstractSessionMB seja SMB e ela seja parte de um 
+     *   Considere que a classe que estende AbstractSessionMb seja SMB e ela seja parte de um 
      *   sistema (projeto) S. Todo sistema S e managed bean SMB deve ter uma classe DAO que estenda 
-     *   a classe AbstractSessionDAO para fornecer os dados de sessão.
+     *   a classe AbstractSessionDao para fornecer os dados de sessão.
      * </p>
 	 */
     @Inject

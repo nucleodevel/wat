@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBElement;
 
-import org.nucleodevel.webapptemplate.dao.AbstractDAO;
+import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
@@ -23,12 +23,12 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * <p>
  *   Classe abstrata que implementa o comportamento padrão de um servidor que provê um recurso de 
  *   webservice que retorna entidades de um tipo E. Esta classe é considerada um datasource para um 
- *   DAO, que seria o cliente de um web service, do tipo AbstractWSClient. Então, AbstractWSClient 
+ *   DAO, que seria o cliente de um web service, do tipo AbstractWsClient. Então, AbstractWsClient 
  *   é o DAO e esta classe o Datasource.   
  * </p>
  * <p>
  *   Na verdade, esta classe é um datasource que redireciona sua requisição para um DAO e seu 
- *   datasource. Ou seja, um AbstractWSServer redireciona suas requisições geralmente para um DAO 
+ *   datasource. Ou seja, um AbstractWsServer redireciona suas requisições geralmente para um DAO 
  *   de banco de dados e este para seu datasource. Porém, nada impede que esta classe redirecione 
  *   para outro webservice, porém o mais típico é que o DAO seja de banco de dados, ou seja, um DAO 
  *   do tipo AbstractDbClient. 
@@ -36,8 +36,8 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
  */
-public abstract class AbstractRESTServer
-	<TID, E extends AbstractEntity<TID>, DAO extends AbstractDAO<E>> {
+public abstract class AbstractRestServer
+	<TID, E extends AbstractEntity<TID>, DAO extends AbstractDao<E>> {
 	
 	
 	/* 
@@ -49,8 +49,8 @@ public abstract class AbstractRESTServer
 	
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractWSServer seja S, todo S deve estar associado a 
-     *   uma subclasse de AbstractDAO DAO e ambas, S e DAO, tenham uma classe entidade E como tipo 
+     *   Considere que a classe que estende AbstractWsServer seja S, todo S deve estar associado a 
+     *   uma subclasse de AbstractDao DAO e ambas, S e DAO, tenham uma classe entidade E como tipo 
      *   parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD tipo E 
      *   que S necessitar.
      * </p>
@@ -75,7 +75,7 @@ public abstract class AbstractRESTServer
     
     protected DAO getDao() {
     	if (dao == null)
-    		dao = getNewDAOInstance();
+    		dao = getNewDaoInstance();
 		return dao;
 	}
     
@@ -85,7 +85,7 @@ public abstract class AbstractRESTServer
      * </p>
      */
     @SuppressWarnings("unchecked")
-	protected Class<DAO> getDAOClass() {
+	protected Class<DAO> getDaoClass() {
     	if (daoClass == null)
     		daoClass = 
     			(Class<DAO>) ParameterizedClassUtils
@@ -101,9 +101,9 @@ public abstract class AbstractRESTServer
 	 * @return Instância da classe parametrizada DAO
 	 */
 	@SuppressWarnings("unchecked")
-	public DAO getNewDAOInstance() {
+	public DAO getNewDaoInstance() {
 		try {
-			Constructor<?> cons = getDAOClass().getConstructor();   
+			Constructor<?> cons = getDaoClass().getConstructor();   
 			return (DAO) cons.newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
