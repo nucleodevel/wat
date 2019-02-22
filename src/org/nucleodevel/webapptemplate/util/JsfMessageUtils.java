@@ -1,11 +1,7 @@
 package org.nucleodevel.webapptemplate.util;
 
-import java.util.ResourceBundle;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  * <p>
@@ -17,21 +13,7 @@ import javax.naming.NamingException;
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
-public class JsfVariableUtils {
-	
-	
-	/* 
-	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
-	 * --------------------------------------------------------------------------------------------
-	 */
-
-	
-    /**
-	 * Caminho padrão do arquivo de variáveis customizadas usadas por webapptemplate. Como exemplo 
-	 * temos as variáveis-padrão de erro e sucesso, acesso indevido, etc.
-	 */
-	private static final String RESOURCE_GENERIC_MSG = "/resources/generic-messages";
+public class JsfMessageUtils {
 	
 	
 	/* 
@@ -40,50 +22,6 @@ public class JsfVariableUtils {
 	 * --------------------------------------------------------------------------------------------
 	 */
     
-    /**
-     * <p>
-     *   Tenta obter o valor de uma variável definida no ambiente do servidor. 
-     * </p>
-     * @param key Nome da variável de ambiente.
-     * @return Valor da variável de ambiente cujo nome foi passado por parâmetro.
-     */
-    public static String getVariableFromEnvironment(String key) {
-    	InitialContext initialContext = null;
-        try {
-			initialContext = new javax.naming.InitialContext();
-			return (String) initialContext.lookup("java:comp/env/" + key);
-	    } catch (NamingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}  
-		return null;
-    }
-    
-    
-    /**
-	 * <p>
-	 *   Este método fornece o conteúdo da variável cuja chave é passada por parâmetro e está 
-	 *   localizada no arquivo padrão cujo caminho é referenciado por RESOURCE_GENERIC_MSG.
-	 * </p>
-	 * @param key Chave da variável a ser retornada.
-	 * @return Valor (conteúdo) da variável a ser retornada.
-	 */
-	public static String getVariableFromResource(String key) {
-		return ResourceBundle.getBundle(RESOURCE_GENERIC_MSG).getString(key);
-	}
-	
-	/**
-	 * <p>
-	 *   Este método fornece o conteúdo da variável cuja chave é passada como 2° parâmetro e está 
-	 *   localizada no arquivo cujo caminho é passado no 1° parâmetro.
-	 * </p>
-	 * @param resource Caminho absoluto do arquivo onde a variável está armazenada.
-	 * @param key Chave da variável a ser retornada.
-	 * @return Valor (conteúdo) da variável a ser retornada.
-	 */
-	public static String getVariableFromResource(String resource, String key) {
-		return ResourceBundle.getBundle(resource).getString(key);
-	}
 
     /**
      * <p>
@@ -114,8 +52,8 @@ public class JsfVariableUtils {
     public static void addErrorMessage(String key) {
         FacesMessage facesMsg = new FacesMessage(
         	FacesMessage.SEVERITY_ERROR, 
-        	getVariableFromResource("generic.error"), 
-        	getVariableFromResource(key)
+        	VariableUtils.getVariableFromResource("generic.error"), 
+        	VariableUtils.getVariableFromResource(key)
         );
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -133,8 +71,8 @@ public class JsfVariableUtils {
     public static void addErrorMessage(String resource, String key) {
         FacesMessage facesMsg = new FacesMessage(
         	FacesMessage.SEVERITY_ERROR, 
-        	getVariableFromResource("generic.error"), 
-        	getVariableFromResource(resource, key)
+        	VariableUtils.getVariableFromResource("generic.error"), 
+        	VariableUtils.getVariableFromResource(resource, key)
         );
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -151,8 +89,8 @@ public class JsfVariableUtils {
     public static void addSuccessMessage(String key) {
         FacesMessage facesMsg = new FacesMessage(
         	FacesMessage.SEVERITY_INFO, 
-        	getVariableFromResource("generic.success"), 
-        	getVariableFromResource(key)
+        	VariableUtils.getVariableFromResource("generic.success"), 
+        	VariableUtils.getVariableFromResource(key)
         );
         FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -170,8 +108,8 @@ public class JsfVariableUtils {
     public static void addSuccessMessage(String resource, String key) {
         FacesMessage facesMsg = new FacesMessage(
         	FacesMessage.SEVERITY_INFO, 
-        	getVariableFromResource("generic.success"), 
-        	getVariableFromResource(resource, key)
+        	VariableUtils.getVariableFromResource("generic.success"), 
+        	VariableUtils.getVariableFromResource(resource, key)
         );
         FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

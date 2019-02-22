@@ -12,8 +12,8 @@ import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
 import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
+import org.nucleodevel.webapptemplate.util.JsfMessageUtils;
 import org.nucleodevel.webapptemplate.util.JsfUrlUtils;
-import org.nucleodevel.webapptemplate.util.JsfVariableUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 import org.nucleodevel.webapptemplate.util.PersistAction;
 
@@ -230,7 +230,7 @@ public abstract class AbstractJsfCrudMb
      */
     public String create(String nextPath) {
     	if (!canCreate()) {
-    		JsfVariableUtils.addErrorMessage("can.error.generic");
+    		JsfMessageUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -239,7 +239,7 @@ public abstract class AbstractJsfCrudMb
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), true)) {
-			JsfVariableUtils.addErrorMessage(
+			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -269,7 +269,7 @@ public abstract class AbstractJsfCrudMb
      */
 	public void createOnly() {
     	if (!canCreate()) {
-    		JsfVariableUtils.addErrorMessage("can.error.generic");
+    		JsfMessageUtils.addErrorMessage("can.error.generic");
 			return;
     	}
     	
@@ -278,7 +278,7 @@ public abstract class AbstractJsfCrudMb
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
         if (!getDao().isAnUniqueEntity(getSelected(), true)) {
-			JsfVariableUtils.addErrorMessage(
+			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return;
@@ -297,7 +297,7 @@ public abstract class AbstractJsfCrudMb
      */
     public String edit(String nextPath) {
     	if (!canEdit()) {
-    		JsfVariableUtils.addErrorMessage("can.error.generic");
+    		JsfMessageUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -306,7 +306,7 @@ public abstract class AbstractJsfCrudMb
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
-			JsfVariableUtils.addErrorMessage(
+			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -340,7 +340,7 @@ public abstract class AbstractJsfCrudMb
      */
     public String editWithoutMessage(String nextPath) {
     	if (!canEdit()) {
-    		JsfVariableUtils.addErrorMessage("can.error.generic");
+    		JsfMessageUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -349,7 +349,7 @@ public abstract class AbstractJsfCrudMb
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
 		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
-			JsfVariableUtils.addErrorMessage(
+			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
 			return nextPath != null? nextPath: "index.jsf?faces-redirect=true";
@@ -383,7 +383,7 @@ public abstract class AbstractJsfCrudMb
      */
     public String remove(String nextPath) {  
     	if (!canRemove()) {
-    		JsfVariableUtils.addErrorMessage("can.error.generic");
+    		JsfMessageUtils.addErrorMessage("can.error.generic");
 			return "";
     	}
     	
@@ -427,7 +427,7 @@ public abstract class AbstractJsfCrudMb
             	else if (persistAction == PersistAction.DELETE)
             		getDao().delete(selected);
             	if (successMessage != null)
-            		JsfVariableUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
+            		JsfMessageUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -435,9 +435,9 @@ public abstract class AbstractJsfCrudMb
                     msg = cause.getLocalizedMessage();
                 }
                 if (msg.length() > 0) {
-                    JsfVariableUtils.addErrorMessage(RESOURCE_APP_MSG, msg);
+                    JsfMessageUtils.addErrorMessage(RESOURCE_APP_MSG, msg);
                 } else {
-                	JsfVariableUtils.addErrorMessage(ex, "persistence.error.generic");
+                	JsfMessageUtils.addErrorMessage(ex, "persistence.error.generic");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
