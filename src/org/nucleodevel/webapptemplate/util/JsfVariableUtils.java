@@ -40,6 +40,25 @@ public class JsfVariableUtils {
 	 * --------------------------------------------------------------------------------------------
 	 */
     
+    /**
+     * <p>
+     *   Tenta obter o valor de uma variável definida no ambiente do servidor. 
+     * </p>
+     * @param key Nome da variável de ambiente.
+     * @return Valor da variável de ambiente cujo nome foi passado por parâmetro.
+     */
+    public static String getVariableFromEnvironment(String key) {
+    	InitialContext initialContext = null;
+        try {
+			initialContext = new javax.naming.InitialContext();
+			return (String) initialContext.lookup("java:comp/env/" + key);
+	    } catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}  
+		return null;
+    }
+    
     
     /**
 	 * <p>
@@ -156,25 +175,6 @@ public class JsfVariableUtils {
         );
         FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-    }
-    
-    /**
-     * <p>
-     *   Tenta obter o valor de uma variável definida no ambiente do servidor. 
-     * </p>
-     * @param key Nome da variável de ambiente.
-     * @return Valor da variável de ambiente cujo nome foi passado por parâmetro.
-     */
-    public static String getVariableFromEnvironment(String key) {
-    	InitialContext initialContext = null;
-        try {
-			initialContext = new javax.naming.InitialContext();
-			return (String) initialContext.lookup("java:comp/env/" + key);
-	    } catch (NamingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}  
-		return null;
     }
 	
 }
