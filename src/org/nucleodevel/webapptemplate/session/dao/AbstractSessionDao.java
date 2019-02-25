@@ -29,8 +29,19 @@ public abstract class AbstractSessionDao {
 	protected abstract HttpSession getSession();
 	
 	/**
-	 * @return Indica se o dispositivo que está acessando o sistema é móvel. 
+	 * @param key nome do atributo a ser lido da sessão HTTP
+	 * @return valor do atributo a ser lido da sessão HTTP
 	 */
-	public abstract boolean isMobile();
+	public Object getSessionAttribute(String key) {
+		return getSession().getAttribute(key);
+	}
+	
+	/**
+	 * @param key nome do atributo a ser escrito na sessão HTTP
+	 * @param value valor a ser escrito no atributo da sessão HTTP 
+	 */
+	public void setSessionAttribute(String key, Object value) {
+		getSession().setAttribute(key, value);
+	}
 	
 }

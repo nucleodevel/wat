@@ -4,7 +4,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.nucleodevel.webapptemplate.session.dao.AbstractSessionDao;
-import org.nucleodevel.webapptemplate.util.JsfServletUtils;
 
 /**
  * <p>
@@ -25,16 +24,10 @@ public abstract class AbstractSessionJsfDao extends AbstractSessionDao {
     /* (non-Javadoc)
      * @see org.nucleodevel.webapptemplate.session.AbstractSessionDao#getSession()
      */
-    protected HttpSession getSession() {
+    @Override
+	protected HttpSession getSession() {
         return 
         	(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     }
-	
-	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.session.AbstractSessionDao#isMobile()
-	 */
-	public boolean isMobile() {
-		return JsfServletUtils.isMobile();
-	}
 	
 }
