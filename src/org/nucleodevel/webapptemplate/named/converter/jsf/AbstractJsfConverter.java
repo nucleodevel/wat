@@ -13,7 +13,8 @@ import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
-/**<p>
+/**
+ * <p>
  *   Classe utilizada pelo JSF para recuperar uma instância do tipo E a partir da string que contém 
  *   o valor do identificador desta instância. A classe DAO, subclasse de AbstractDao, é a classe 
  *   que obtém entidades do tipo E do datasource.
@@ -90,11 +91,11 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
 	
     
 	/* (non-Javadoc)
-     * @see javax.faces.convert.Converter#getAsObject(
-     *     javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String
-     * )
-     */
-    @Override
+	 * @see javax.faces.convert.Converter#getAsObject(
+	 *     javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String
+	 * )
+	 */
+	@Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
     	if (value == null || value.length() == 0 || getIdFromString(value) == null)
     		return null;

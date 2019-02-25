@@ -48,6 +48,9 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	 */
 	
     
+    /**
+     * Na primeira requisição, obtém o entityManager.
+     */
     protected EntityManager getEntityManager() {
     	if (entityManager == null) {
     		EntityManagerFactory entityManagerFactory = 
@@ -76,7 +79,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAll()
+     * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectAll()
      */
     @Override
 	public List<E> selectAll() {
@@ -84,9 +87,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	}
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAllByUniqueParams(
-     * 	   java.util.Map
-     * )
+     * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectAllByUniqueParams(java.util.Map)
      */
     @Override
 	public List<E> selectAllByUniqueParams(Map<String, Object> params) {
@@ -94,7 +95,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAllByRange(int[])
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectAllByRange(int[])
 	 */
 	@Override
     public List<E> selectAllByRange(int[] range) {    	
@@ -107,7 +108,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
     }
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectCount()
+     * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectCount()
      */
     @Override
     public int selectCount() {
@@ -119,7 +120,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
     }
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectOne(java.lang.Object)
+     * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectOne(java.lang.Object)
      */
     @Override
 	public E selectOne(Object id) {
@@ -155,6 +156,8 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
      * </p>
      * @param namedQuery NamedQuery que será invocada.
      * @param params Parâmetros que a nemdQuery espera que sejam declarados.
+     * @param limit Número de entidades retornadas.
+     * @param offset Primeira entidade retornada.
      * @return Lista com entidades E retornadas pela namedQuery.
      */
     protected List<E> selectAllByNamedQuery(
@@ -194,7 +197,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#insert(
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#insert(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -207,7 +210,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#update(
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#update(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -220,7 +223,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#delete(
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#delete(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */

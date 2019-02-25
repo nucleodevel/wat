@@ -10,8 +10,6 @@ import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
  *   Classe abstrata que implementa o comportamento padrão de um managed bean simples.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
- * @param <DAO> classe DAO que apóia o managed bean.
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
 public abstract class AbstractJsfSimpleMb<SDAO extends AbstractSessionDao>

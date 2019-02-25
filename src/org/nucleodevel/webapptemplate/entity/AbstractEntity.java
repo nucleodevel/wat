@@ -82,9 +82,9 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
     
 
     /* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (getEntityId() != null ? getEntityId().hashCode() : 0);

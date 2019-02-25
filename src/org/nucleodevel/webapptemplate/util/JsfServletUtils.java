@@ -68,7 +68,6 @@ public class JsfServletUtils {
 	 * </p>
 	 * @param stream Stream a ser dado como saída.
 	 * @param name Nome de arquivo a ser fornecido ao stream.
-	 * @throws JRException
 	 * @throws IOException
 	 */
 	public static void showInputStream(ByteArrayInputStream stream, String name) 

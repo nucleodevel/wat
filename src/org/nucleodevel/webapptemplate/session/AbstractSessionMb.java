@@ -18,8 +18,7 @@ import javax.inject.Inject;
  * @author Dallan Augusto Toledo Reis
  * @param <DAO> classe DAO que apóia este managed bean.
  */
-public abstract class AbstractSessionMb<DAO extends AbstractSessionDao> 
-	implements Serializable {
+public abstract class AbstractSessionMb<DAO extends AbstractSessionDao> implements Serializable {
 	
 	
 	/* 

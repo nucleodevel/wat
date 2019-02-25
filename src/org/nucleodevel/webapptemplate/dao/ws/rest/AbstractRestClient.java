@@ -86,7 +86,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAll()
+     * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectAll()
      */
     @Override
 	public List<E> selectAll() {
@@ -95,7 +95,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectAllByRange(int[])
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectAllByRange(int[])
 	 */
 	@Override
     public List<E> selectAllByRange(int[] range) {    	
@@ -103,7 +103,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
     }
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#selectOne(java.lang.Object)
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#selectOne(java.lang.Object)
 	 */
 	@Override
 	public E selectOne(Object id) {
@@ -123,7 +123,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#insert(
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#insert(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -136,7 +136,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#update(
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#update(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */
@@ -149,7 +149,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.nucleodevel.webapptemplate.model.dao.AbstractDao#delete(
+	 * @see org.nucleodevel.webapptemplate.dao.AbstractDao#delete(
 	 *     org.nucleodevel.webapptemplate.entity.AbstractEntity
 	 * )
 	 */

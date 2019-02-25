@@ -49,10 +49,10 @@ public abstract class AbstractRestServer
 	
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractWsServer seja S, todo S deve estar associado a 
-     *   uma subclasse de AbstractDao DAO e ambas, S e DAO, tenham uma classe entidade E como tipo 
-     *   parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD tipo E 
-     *   que S necessitar.
+     *   Considere que a classe que estende AbstractWsServer seja WS, todo WS deve estar associado 
+     *   a uma subclasse de AbstractDao DAO e ambas, WS e DAO, tenham uma classe entidade E como 
+     *   tipo parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD 
+     *   tipo E que WS necessitar.
      * </p>
      */
     protected DAO dao;

@@ -193,6 +193,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	 *   Método que realiza a inserção da entidade no datasource.
 	 * </p>
 	 * @param entity Entidade que será inserida no datasource.
+	 * @return Mesma instância persistida, eventualmente com o novo ID.
 	 */
 	public abstract E insert(E entity);
 
@@ -201,6 +202,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	 *   Método que realiza a atualização da entidade no datasource.
 	 * </p>
 	 * @param entity Entidade que será inserida no datasource.
+	 * @return Mesma instância persistida.
 	 */
 	public abstract E update(E entity);
 
@@ -209,6 +211,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	 *   Método que realiza a remoção da entidade no datasource.
 	 * </p>
 	 * @param entity Entidade que será inserida no datasource.
+	 * @return Mesma instância persistidaD.
 	 */
 	public abstract E delete(E entity);
 	
@@ -226,6 +229,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	 *   entidades do tipo E.
 	 * </p>
 	 * @param entities Lista que será ordenada.
+	 * @return Mesma lista ordenada.
 	 */
 	public List<E> sort(List<E> entities) {
 		Collections.sort(entities);
