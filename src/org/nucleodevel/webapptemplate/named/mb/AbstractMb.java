@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
+import org.nucleodevel.webapptemplate.session.dao.AbstractSessionDao;
 
 /**
  * <p>

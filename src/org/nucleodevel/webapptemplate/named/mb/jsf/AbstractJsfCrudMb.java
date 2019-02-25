@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import org.nucleodevel.webapptemplate.dao.AbstractDao;
 import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
-import org.nucleodevel.webapptemplate.session.AbstractSessionDao;
+import org.nucleodevel.webapptemplate.session.dao.jsf.AbstractSessionJsfDao;
 import org.nucleodevel.webapptemplate.util.JsfMessageUtils;
 import org.nucleodevel.webapptemplate.util.JsfUrlUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
@@ -40,7 +40,7 @@ import org.nucleodevel.webapptemplate.util.PersistAction;
  * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
  */
 public abstract class AbstractJsfCrudMb
-	<E extends AbstractEntity<?>, DAO extends AbstractDao<E>, SDAO extends AbstractSessionDao>
+	<E extends AbstractEntity<?>, DAO extends AbstractDao<E>, SDAO extends AbstractSessionJsfDao>
 	extends AbstractMb<SDAO> 
 	implements Serializable {
 	

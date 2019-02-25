@@ -1,4 +1,4 @@
-package org.nucleodevel.webapptemplate.session;
+package org.nucleodevel.webapptemplate.session.dao;
 
 import javax.servlet.http.HttpSession;
 
