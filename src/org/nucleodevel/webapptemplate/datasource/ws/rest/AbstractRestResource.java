@@ -28,7 +28,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * </p>
  * <p>
  *   Na verdade, esta classe é um datasource que redireciona sua requisição para um DAO e seu 
- *   datasource. Ou seja, um AbstractWsServer redireciona suas requisições geralmente para um DAO 
+ *   datasource. Ou seja, um AbstractWsResource redireciona suas requisições geralmente para um DAO 
  *   de banco de dados e este para seu datasource. Porém, nada impede que esta classe redirecione 
  *   para outro webservice, porém o mais típico é que o DAO seja de banco de dados, ou seja, um DAO 
  *   do tipo AbstractDbClient. 
@@ -36,7 +36,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
  */
-public abstract class AbstractRestServer
+public abstract class AbstractRestResource
 	<TID, E extends AbstractEntity<TID>, DAO extends AbstractDao<E>> {
 	
 	
@@ -49,18 +49,18 @@ public abstract class AbstractRestServer
 	
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractWsServer seja WS, todo WS deve estar associado 
-     *   a uma subclasse de AbstractDao DAO e ambas, WS e DAO, tenham uma classe entidade E como 
-     *   tipo parametrizado. DAO será responsável por efetivamente realizar as operações de CRUD 
-     *   tipo E que WS necessitar.
+     *   Considere que a classe que estende AbstractWsResource seja WS, todo WS deve estar 
+     *   associado a uma subclasse de AbstractDao DAO e ambas, WS e DAO, tenham uma classe entidade 
+     *   E como tipo parametrizado. DAO será responsável por efetivamente realizar as operações de 
+     *   CRUD tipo E que WS necessitar.
      * </p>
      */
     protected DAO dao;
     
     /**
      * <p>
-     *   Atributo que armazena a classe assumida por DAO, que fornece os dados para este WS Server. 
-     *   Geralmente usado para se obter nome desta classe.
+     *   Atributo que armazena a classe assumida por DAO, que fornece os dados para este WS 
+     *   Resource. Geralmente usado para se obter nome desta classe.
      * </p>
      */
     private Class<DAO> daoClass;

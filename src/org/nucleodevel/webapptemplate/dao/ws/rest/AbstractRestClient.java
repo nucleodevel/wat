@@ -20,7 +20,7 @@ import org.nucleodevel.webapptemplate.entity.AbstractEntity;
  * <p>
  *   Subclasse abstrata de AbstractDao que implementa o comportamento padrão de um DAO que opera 
  *   sobre um datasource do tipo webservice. Na terminologia de webservices, seria um cliente de 
- *   webservice, que obtém os dados de um servidor.   
+ *   webservice, que obtém os dados de um recurso (resource).   
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> subclasse de AbstractEntity que mapeia uma entidade XML ou Json resultante de uma 
@@ -38,10 +38,11 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 	/**
 	 * <p>
-	 *   Atributo que efetivamente realiza as operações de webservice, fornecendo acesso ao server.
+	 *   Atributo que efetivamente realiza as operações de webservice, fornecendo acesso ao 
+	 *   recurso.
 	 * </p>
 	 */
-	private WebTarget service;
+	private WebTarget resource;
 	
 	
 	/* 
@@ -51,23 +52,23 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	 */
 	
     
-    protected WebTarget getService() {
-    	if (service == null) {
+    protected WebTarget getResource() {
+    	if (resource == null) {
     		ClientConfig config = new ClientConfig();
     		Client client = ClientBuilder.newClient(config).register(MultiPartFeature.class);
-    	    service = client.target(UriBuilder.fromUri(getServerUrl()).build());
+    	    resource = client.target(UriBuilder.fromUri(getResourceUrl()).build());
     	}
-		return service;
+		return resource;
 	}
 	
 	/**
      * <p>
-     *   Cada subclasse deve indicar a URL do servidor que provê o webservice. Esta URL será usada 
-     *   para iniciar {@link #service service}.
+     *   Cada subclasse deve indicar a URL do recurso do webservice. Esta URL será usada para 
+     *   iniciar {@link #resource resource}.
      * </p>
-     * @return URL do servidor que provê o webservice.
+     * @return URL do recurso do webservice.
      */
-    public abstract String getServerUrl();
+    public abstract String getResourceUrl();
 	
     /**
      * <p>
@@ -91,7 +92,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
     @Override
 	public List<E> selectAll() {
 		return 
-			getService().request().accept(MediaType.APPLICATION_XML).get(getGenericTypeForList());
+			getResource().request().accept(MediaType.APPLICATION_XML).get(getGenericTypeForList());
 	}
 	
 	/* (non-Javadoc)
@@ -109,7 +110,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	public E selectOne(Object id) {
 		if (id != null)
 			return 
-				getService().path(id.toString()).request().accept(MediaType.APPLICATION_XML)
+				getResource().path(id.toString()).request().accept(MediaType.APPLICATION_XML)
 					.get(getEntityClass());
 		return null;
 	}
@@ -129,7 +130,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	 */
 	@Override
 	public E insert(E entity) {
-		Response response = getService().request(MediaType.APPLICATION_XML).post(
+		Response response = getResource().request(MediaType.APPLICATION_XML).post(
 			Entity.entity(entity, MediaType.APPLICATION_XML), Response.class
 		);
 		return response.readEntity(getEntityClass());
@@ -142,7 +143,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	 */
 	@Override
 	public E update(E entity) {
-		Response response = getService().request(MediaType.APPLICATION_XML).put(
+		Response response = getResource().request(MediaType.APPLICATION_XML).put(
 			Entity.entity(entity, MediaType.APPLICATION_XML), Response.class
 		);
 		return response.readEntity(getEntityClass());
@@ -156,7 +157,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	@Override
 	public E delete(E entity) {
 		Response response =  
-			getService().path(entity.getEntityId().toString())
+			getResource().path(entity.getEntityId().toString())
 				.request(MediaType.APPLICATION_XML).delete(Response.class);
 		return response.readEntity(getEntityClass());
 	}
