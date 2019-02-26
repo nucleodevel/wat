@@ -11,27 +11,27 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um DAO que provê acesso ao modelo de 
- *   dados nos sistemas que usam webapptemplate. Ela provê acesso a um datasource, que pode um SGBD
- *   ou um WebService, e repassa a esses as operações de persistência necessárias.
+ *   Abstract class that implements the default behavior of a DAO that provides access to a 
+ *   datasource in applications that use webapptemplate. This data source can be a database or a 
+ *   webservice that receives persistence operations.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
+ * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
  */
 public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
+	 *   Attributes
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
     
 	/**
      * <p>
-     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do DAO. Geralmente 
-     *   usado para se obter nome desta classe.
+     *   Attribute that stores the class adopted by E, which is the target entity of the DAO. It is
+     *   often used to get the name of this class.
      * </p>
      */
     private Class<E> entityClass;
@@ -46,7 +46,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 
     /**
      * <p>
-     *   Obtém tipo class do tipo E via ParameterizedClassUtils
+     *   Returns the class<?> of E via ParameterizedClassUtils
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -60,15 +60,15 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 
 	/**
 	 * <p>
-	 *   Método que retorna uma nova instância do tipo parametrizado E via construtor default. Ou 
-	 *   seja, toda classe que for assumida por E deve ter um construtor padrão sem parâmetros.
+	 *   Returns a new instance of E via default constructor. Therefore, every class that is 
+	 *   adopted by E must have a default constructor without parameters.
 	 * </p>
 	 * @return Instância da classe parametrizada E
 	 */
 	@SuppressWarnings("unchecked")
 	public E getNewEntityInstance() {
 		try {
-			Constructor<?> cons = getEntityClass().getConstructor();   
+			Constructor<?> cons = getEntityClass().getConstructor();
 			return (E) cons.newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -88,16 +88,14 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
     /**
 	 * <p>
-	 *   Método usado antes das operações de inserção e atualização no datasource para evitar que 
-	 *   uma entidade não única seja persistida e cause algum erro. A indicação isInsert é 
-	 *   necessária porque se é desejado uma edição, a busca pode retornar a própria entidade se 
-	 *   não houve alteração dos parâmetros unique originais. Assim, é possível indicar que esta 
-	 *   busca pode ser ignorada.
+	 *   Method used before data source insertion and update operations to prevent a non-unique 
+	 *   entity from being persisted and causing an error. The isInsert flag is required to 
+	 *   indicate whether the operation is an insert or update, since the update operation should 
+	 *   ignore the entity itself being persisted.
 	 * </p>
-	 * @param entity Entidade E cuja unicidade será testada.
-	 * @param isInsert Indica se a entidade será inserida ou editada no datasource. Essa informação 
-	 *   é importante para verificar a unicidade da entidade.
-	 * @return Booleano que retorna o resultado da verificação da unicidade de selected.
+	 * @param entity Entity that will be tested as unique.
+	 * @param isInsert Indicate whether the operation is an insert or update.
+	 * @return Boolean that indicates whether or not the entity is unique.
 	 */
 	public boolean isAnUniqueEntity(E entity, boolean isInsert) {
 		Map<String, Object> params = getUniqueParams(entity);
@@ -113,58 +111,49 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
     
     /**
      * <p>
-     *   É delegado às subclasses o trabalho de designar quais atributos de selected devem ser 
-     *   testados a fim de saber se ele é unique.
+     *   A subclass must implement a method that returns the values of the unique attributes of the
+     *   entity.
      * </p>
-     * @param entity Entidade E da qual será formado o mapeamento dos parâmetros unique.
-     * @return Mapa de parâmetros unique de selected.
+     * @param entity Entity E from which the map of unique parameters will be mounted.
      */
     protected abstract Map<String, Object> getUniqueParams(E entity);
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de leitura de dados no datasource 
+	 *   Data source read operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 
 
 	/**
 	 * <p>
-	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource no 
-	 *   momento. Como esta operação é dependente do tipo do datasource, ela é delegada às 
-	 *   subclasses.
+	 *   A subclass must implement a method that returns all the entities read from the datasource 
+	 *   at a given time.
 	 * </p>
-	 * @return Lista com todas as entidades E presentes no datasource.
 	 */
 	public abstract List<E> selectAll();
 	
 	/**
 	 * <p>
-	 *   Obtém uma ou mais entidades E que correspondem aos parâmetros passados para testar a 
-	 *   unicidade destes. 
+	 *   A subclass must implement a method that is used by isAnUniqueEntity to get all entities 
+	 *   that match the values passed by the parameters.
 	 * </p>
-	 * @param params parâmetros cuja unicidade será testada.
-	 * @return Uma ou mais entidades E que correspondem aos parâmetros passados.
 	 */
 	public abstract List<E> selectAllByUniqueParams(Map<String, Object> params);
 	
 	/**
 	 * <p>
-	 *   Cada subclasse deve implementar um método que obtém todas as entidades E do datasource que 
-	 *   estejam dentro do intervalo passado por parâmetro.
+	 *   A subclass must implement a method that returns all entities read from a data source that 
+	 *   are in a specific range.
 	 * </p>
-	 * @param Intervalo de leitura de entidades E no datasource.
-	 * @return Lista com todas as entidades E presentes no datasource que estejam dentro do 
-	 *   intervalo passado por parâmetro.
 	 */
 	public abstract List<E> selectAllByRange(int[] range);
     
     /**
      * <p>
-     *   Retorna o número de entidades E existentes no datasource.
-     * </p>
-     * @return Número total de entidades E existentes  
+     *   Returns the number of E entities in the datasource.
+     * </p>  
      */
     public int selectCount() {
     	return selectAll().size();
@@ -172,46 +161,44 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 
 	/**
 	 * <p>
-	 *   Obtém a entidade E cujo ID é aquele passado por parâmetro.
+	 *   A subclass must implement a method that returns the entity whose ID is passed by 
+	 *   parameter.
 	 * </p>
-	 * @param id ID da instância que será fornecida pelo datasource.
-	 * @return Instância cujo ID foi passado por parâmetro ou nulo, se não existir instância com 
-	 *   tal ID.
 	 */
 	public abstract E selectOne(Object id);
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de escrita de dados no datasource 
+	 *   Data source write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
 
 	/**
 	 * <p>
-	 *   Método que realiza a inserção da entidade no datasource.
+	 *   A subclass must implement a method that performs an insert operation on the entity passed 
+	 *   by parameter.
 	 * </p>
-	 * @param entity Entidade que será inserida no datasource.
-	 * @return Mesma instância persistida, eventualmente com o novo ID.
+	 * @return The same entity but with its new ID.
 	 */
 	public abstract E insert(E entity);
 
 	/**
 	 * <p>
-	 *   Método que realiza a atualização da entidade no datasource.
+	 *   A subclass must implement a method that performs an update operation on the entity passed 
+	 *   by parameter.
 	 * </p>
-	 * @param entity Entidade que será inserida no datasource.
-	 * @return Mesma instância persistida.
+	 * @return The same entity.
 	 */
 	public abstract E update(E entity);
 
 	/**
 	 * <p>
-	 *   Método que realiza a remoção da entidade no datasource.
+	 *   A subclass must implement a method that performs a delete operation on the entity passed 
+	 *   by parameter.
 	 * </p>
-	 * @param entity Entidade que será inserida no datasource.
-	 * @return Mesma instância persistidaD.
+	 * @return The same entity.
 	 */
 	public abstract E delete(E entity);
 	
@@ -225,11 +212,9 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
 	/**
 	 * <p>
-	 *   Método usado por outros que não possuem uma estratégia própria de ordenação de listas de 
-	 *   entidades do tipo E.
+	 *   A method that can be used to correct and returns a previous operation that returned an 
+	 *   unordered collection of E entities.
 	 * </p>
-	 * @param entities Lista que será ordenada.
-	 * @return Mesma lista ordenada.
 	 */
 	public List<E> sort(List<E> entities) {
 		Collections.sort(entities);

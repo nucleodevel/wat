@@ -21,20 +21,15 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um servidor que provê um recurso de 
- *   webservice que retorna entidades de um tipo E. Esta classe é considerada um datasource para um 
- *   DAO, que seria o cliente de um web service, do tipo AbstractWsClient. Então, AbstractWsClient 
- *   é o DAO e esta classe o Datasource.   
+ *   Abstract class that implements the default behavior of a REST webservice resource that 
+ *   provides operations of entities E to an AbstractRestClient.   
  * </p>
  * <p>
- *   Na verdade, esta classe é um datasource que redireciona sua requisição para um DAO e seu 
- *   datasource. Ou seja, um AbstractWsResource redireciona suas requisições geralmente para um DAO 
- *   de banco de dados e este para seu datasource. Porém, nada impede que esta classe redirecione 
- *   para outro webservice, porém o mais típico é que o DAO seja de banco de dados, ou seja, um DAO 
- *   do tipo AbstractDbClient. 
+ *   Since a Web service resource typically needs a DAO to access a database or other data source, 
+ *   it must indicate which subclass of AbstractDao will be its DAO.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
+ * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
  */
 public abstract class AbstractRestResource
 	<TID, E extends AbstractEntity<TID>, DAO extends AbstractDao<E>> {
@@ -42,25 +37,23 @@ public abstract class AbstractRestResource
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
+	 *   Attributes
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
 	
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractWsResource seja WS, todo WS deve estar 
-     *   associado a uma subclasse de AbstractDao DAO e ambas, WS e DAO, tenham uma classe entidade 
-     *   E como tipo parametrizado. DAO será responsável por efetivamente realizar as operações de 
-     *   CRUD tipo E que WS necessitar.
+     *   Since a Web service resource typically needs a DAO to access a database or other data 
+     *   source, it must indicate which subclass of AbstractDao will be its DAO.
      * </p>
      */
     protected DAO dao;
     
     /**
      * <p>
-     *   Atributo que armazena a classe assumida por DAO, que fornece os dados para este WS 
-     *   Resource. Geralmente usado para se obter nome desta classe.
+     *   Attribute that stores the class adopted by DAO that provides access to the data source 
+     *   used by this REST resource.
      * </p>
      */
     private Class<DAO> daoClass;
@@ -81,7 +74,7 @@ public abstract class AbstractRestResource
     
 	/**
      * <p>
-     *   Obtém tipo class do tipo DAO via ParameterizedClassUtils.
+     *   Returns the class<?> of DAO via ParameterizedClassUtils
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -95,8 +88,8 @@ public abstract class AbstractRestResource
 
     /**
 	 * <p>
-	 *   Método que retorna uma nova instância do tipo parametrizado DAO via construtor default. Ou 
-	 *   seja, toda classe que for assumida por DAO deve ter um construtor padrão sem parâmetros.
+	 *   Returns a new instance of DAO via default constructor. Therefore, every class that is 
+	 *   adopted by DAO must have a default constructor without parameters.
 	 * </p>
 	 * @return Instância da classe parametrizada DAO
 	 */
@@ -130,7 +123,7 @@ public abstract class AbstractRestResource
 	
 
     /**
-	 * @return Retorna lista de entidades para exibição em browser.
+	 * Returns a list of all E entities to display in a browser.
 	 */
 	@GET
     @Produces(MediaType.TEXT_XML)
@@ -140,7 +133,7 @@ public abstract class AbstractRestResource
     }
 
 	/**
-	 * @return Retorna lista de entidades em formato XML ou Json.
+	 * Returns a list of all E entities in XML and JSON formats.
 	 */
 	@GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
@@ -150,7 +143,7 @@ public abstract class AbstractRestResource
     }
 
 	/**
-	 * @return Retorna número de entidades fornecido pelo DAO.
+	 * Returns the number of existing E entities.
 	 */
 	@GET
     @Path("count")
@@ -161,8 +154,7 @@ public abstract class AbstractRestResource
     }
     
 	/**
-	 * @param id ID da entidade que será retornada. 
-	 * @return Retorna entidade cujo ID foi passado por parâmetro em formato XML e Json.
+	 * Returns a specific E entity by the ID passed by parameter. 
 	 */
 	@GET
     @Path("{entity}")
@@ -173,8 +165,7 @@ public abstract class AbstractRestResource
     }
 
 	/**
-	 * @param id ID da entidade que será retornada. 
-	 * @return Retorna entidade cujo ID foi passado por parâmetro em formato HTML.
+	 * Returns a specific E entity by the ID passed by parameter in HTML format.
 	 */
 	@GET
     @Path("{entity}")
@@ -187,14 +178,14 @@ public abstract class AbstractRestResource
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de escrita de dados no datasource 
+	 *   Data source write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
 
 	/**
-	 * @param jaxbElement Entidade em formato XML que será criada. 
-	 * @return Retorna entidade criada em formato XML e Json.
+	 * Prompts DAO to perform an insert operation on the entity passed by parameter. 
+	 * @return The same entity with its new ID.
 	 */
 	@POST
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -206,8 +197,8 @@ public abstract class AbstractRestResource
     }
 
 	/**
-	 * @param jaxbElement Entidade em formato XML que será editada. 
-	 * @return Retorna entidade editada em formato XML e Json.
+	 * Prompts DAO to perform an update operation on the entity passed by parameter. 
+	 * @return The same entity.
 	 */
 	@PUT
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -219,7 +210,7 @@ public abstract class AbstractRestResource
     }
     
 	/**
-	 * @param id ID da entidade que será removida.
+	 * Prompts DAO to perform a delete operation on the entity passed by parameter. 
 	 */
 	@DELETE
     @Path("{id}")

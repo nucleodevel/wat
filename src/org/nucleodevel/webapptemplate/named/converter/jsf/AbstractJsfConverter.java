@@ -15,18 +15,13 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
  * <p>
- *   Classe utilizada pelo JSF para recuperar uma instância do tipo E a partir da string que contém 
- *   o valor do identificador desta instância. A classe DAO, subclasse de AbstractDao, é a classe 
- *   que obtém entidades do tipo E do datasource.
- * </p>
- * <p>  
- *   Usado principalmente em itens de formulário como selects, radio buttons e checkboxes do JSF, 
- *   que possibilitam ao usuário escolher uma entidade como valor e não simplesmente um ID de uma 
- *   entidade.
+ *   Abstract class used by JSF to obtain an instance of E of a string that contains the identifier 
+ *   of that instance. This string is usually provided by JSF components such as selects, radio 
+ *   buttons, and checkboxes, and the convert requests the corresponding instance to DAO.
  * <p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
- * @param <DAO> Classe DAO que fornece as entidades E para este converter.
+ * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
+ * @param <DAO> DAO class that provides E entities.
  */
 @SuppressWarnings("rawtypes")
 @Named
@@ -36,7 +31,7 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
+	 *   Attributes
 	 * --------------------------------------------------------------------------------------------
 	 */
 	

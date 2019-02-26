@@ -6,26 +6,25 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
  * <p>
- *   Classe abstrata que implementa métodos comuns às entidades que pertencem a um datasource e são 
- *   manipuladas pelos DAOs.
+ *   Abstract class that implements common methods for entities that belong to a datasource and are 
+ *   handled by DAOs.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <TID> Tipo do ID da entidade.
+ * @param <TID> Type of entity's ID. 
  */
 public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<TID>> {
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
+	 *   Attributes
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
     
 	/**
      * <p>
-     *   Atributo que armazena a classe assumida por TID, que é o tipo do ID da entidade. 
-     *   Geralmente usado para se obter nome desta classe.
+     *   Attribute that stores the class adopted by TID, which is the ID of the entity.
      * </p>
      */
     private Class<TID> entityIdClass;
@@ -40,7 +39,7 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
     
 	/**
      * <p>
-     *   Obtém tipo class do tipo TID via ParameterizedClassUtils
+     *   Returns the class<?> of TID via ParameterizedClassUtils
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -54,22 +53,18 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
 
     /**
 	 * <p>
-	 *   É delegado às subclasses a definição do atributo ID, pois somente essas classes conhecem 
-	 *   qual de seus atributos são considerados IDs. Por isso, o getter deste ID precisa ser 
-	 *   definido nestas subclasses.
+	 *   A subclass must implement a method that returns the value of its ID, since only it knows 
+	 *   which attribute is the ID.
 	 * </p>
-	 * @return Atual valor do ID da entidade.
 	 */
     @XmlTransient
 	public abstract TID getEntityId();
 	
 	/**
 	 * <p>
-	 *   É delegado às subclasses a definição do atributo ID, pois somente essas classes conhecem 
-	 *   qual de seus atributos são considerados IDs. Por isso, o setter deste ID precisa ser 
-	 *   definido nestas subclasses.
+	 *   A subclass must implement a method that sets the value of its ID, since only it knows 
+	 *   which attribute is the ID.
 	 * </p>
-	 * @param id Novo valor do ID da entidade.
 	 */
 	public abstract void setEntityId(TID id);
 	
@@ -130,21 +125,17 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
     
     /**
      * <p>
-     *   Retorna uma string que mostra os dados principais da entidade em uma forma mais adequada à 
-     *   visualização. Como cada subclasse conhece quais são seus atributos relevantes, elas devem 
-     *   implementar este método.
+     *   A subclass must implement a method that returns a string that displays the entity's basic 
+     *   information in a friendly format.
      * </p>
-     * @return String de exibição da entidade.
      */
     protected abstract String getViewString();
 	
 	/**
      * <p>
-     *   Retorna uma string que mostra os dados principais da entidade em uma forma mais adequada à 
-     *   comparação. Como cada subclasse conhece quais são seus atributos relevantes, elas devem 
-     *   implementar este método.
+     *   A subclass must implement a method that returns a string that displays the entity's basic 
+     *   information for comparison with another.
      * </p>
-     * @return String de comparação da entidade.
      */
 	protected String getComparableString() {
 		return getViewString().toLowerCase();

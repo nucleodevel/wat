@@ -18,28 +18,28 @@ import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 
 /**
  * <p>
- *   Subclasse abstrata de AbstractDao que implementa o comportamento padrão de um DAO que opera 
- *   sobre um datasource do tipo webservice. Na terminologia de webservices, seria um cliente de 
- *   webservice, que obtém os dados de um recurso (resource).   
+ *   Abstract subclass of AbstractDao that implements a default behavior of a DAO that communicates 
+ *   with a REST webservice resource, which means that it is a REST webservice client that consumes 
+ *   data from that resource.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade XML ou Json resultante de uma 
- *   operação de webservice.
+ * @param <E> Subclass of AbstractEntity that maps an XML or JSON entity resulting from a 
+ *   webservice operation.
  */
 public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends AbstractDao<E> {
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
+	 *   Attributes
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
 	
 	/**
 	 * <p>
-	 *   Atributo que efetivamente realiza as operações de webservice, fornecendo acesso ao 
-	 *   recurso.
+	 *   Attribute that effectively performs the REST webservice operations by providing access to 
+	 *   the resource.
 	 * </p>
 	 */
 	private WebTarget resource;
@@ -63,8 +63,8 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 	/**
      * <p>
-     *   Cada subclasse deve indicar a URL do recurso do webservice. Esta URL será usada para 
-     *   iniciar {@link #resource resource}.
+     *   A subclass must implement a method that returns the URL of the REST resource. Used by 
+     *   getResource().
      * </p>
      * @return URL do recurso do webservice.
      */
@@ -72,16 +72,16 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
     /**
      * <p>
-     *   Provê o tipo List<E> específico de cada subclasse.
+     *   A subclass must implement a method that indicates the specific type of List for entities 
+     *   E.
      * </p>
-     * @return Tipo List<E> específico de cada subclasse.
      */
     public abstract GenericType<List<E>> getGenericTypeForList();
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de leitura de dados no datasource 
+	 *   Data source read operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -118,7 +118,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de escrita de dados no datasource 
+	 *   Data source write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	

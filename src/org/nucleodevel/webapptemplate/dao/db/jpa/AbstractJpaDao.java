@@ -17,25 +17,25 @@ import org.nucleodevel.webapptemplate.entity.AbstractEntity;
 
 /**
  * <p>
- *   Subclasse abstrata de AbstractDao que implementa o comportamento padrão de um DAO que opera 
- *   sobre um datasource que é um banco de dados acessado via JPA.
+ *   Abstract subclass of AbstractDao that implements a default behavior of a DAO that communicates 
+ *   with a database via JPA.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade em uma base de um banco de dados.
+ * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
  */
 public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends AbstractDao<E> {
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Atributos
+	 *   Attributes
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
 	
 	/**
 	 * <p>
-	 *   Atributo que efetivamente realiza as operações de persistência.
+	 *   Attribute that effectively performs the persistence operations.
 	 * </p>
 	 */
 	private EntityManager entityManager;
@@ -49,7 +49,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	
     
     /**
-     * Na primeira requisição, obtém o entityManager.
+     * Gets the entityManager from the factory.
      */
     protected EntityManager getEntityManager() {
     	if (entityManager == null) {
@@ -62,18 +62,16 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 
     /**
      * <p>
-     *   Cada subclasse deve indicar o nome da unidade de persistência que será utilizada por 
-     *   {@link #entityManager entityManager}.
+     *   A subclass must implement a method that returns the name of the persistence unit that will 
+     *   be used by the entityManager.
      * </p>
-     * @return Nome da unidade de persistência que {@link #entityManager entityManager} usa para 
-     *   realizar as operações de persistência.
      */
     protected abstract String getPersistenceUnit();
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de leitura de dados no datasource 
+	 *   Data source read operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -129,12 +127,10 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 
 	/**
      * <p>
-     *   Retorna todas as entidades de persistência E que foram entregues pela Named Query 
-     *   namedQuery com parâmetros definidos em params.
+     *   Returns all entities read from a list of NamedQuery results.
      * </p>
-     * @param namedQuery NamedQuery que será invocada.
-     * @param params Parâmetros que a nemdQuery espera que sejam declarados.
-     * @return Lista com entidades E retornadas pela namedQuery.
+     * @param namedQuery NamedQuery string.
+     * @param params Required NamedQuery parameters.
      */
     protected List<E> selectAllByNamedQuery(String namedQuery, Map<String, Object> params) {
     	getEntityManager().getEntityManagerFactory().getCache().evictAll();
@@ -151,14 +147,12 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 
 	/**
      * <p>
-     *   Retorna todas as entidades de persistência E que foram entregues pela Named Query 
-     *   namedQuery com parâmetros definidos em params.
+     *   Returns the entities read from a list of NamedQuery results that are in a given range.
      * </p>
-     * @param namedQuery NamedQuery que será invocada.
-     * @param params Parâmetros que a nemdQuery espera que sejam declarados.
-     * @param limit Número de entidades retornadas.
-     * @param offset Primeira entidade retornada.
-     * @return Lista com entidades E retornadas pela namedQuery.
+     * @param namedQuery NamedQuery string.
+     * @param params Required NamedQuery parameters.
+     * @param limit Number of entities.
+     * @param offset First entity.
      */
     protected List<E> selectAllByNamedQuery(
     	String namedQuery, Map<String, Object> params, int limit, int offset 
@@ -177,12 +171,10 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
     
     /**
      * <p>
-     *   Retorna todas as entidades de persistência E que foram entregues pela Named Query 
-     *   namedQuery com parâmetros definidos em params e depois ordena-as.
+     *   Returns all entities read from a list of NamedQuery results, and then forces an ordering.
      * </p>
-     * @param namedQuery NamedQuery que será invocada.
-     * @param params Parâmetros que a nemdQuery espera que sejam declarados.
-     * @return Lista ordenada com entidades E retornadas pela namedQuery.
+     * @param namedQuery NamedQuery string.
+     * @param params Required NamedQuery parameters.
      */
     protected List<E> selectAllByNamedQueryAndSort(String namedQuery, Map<String, Object> params) {
     	return sort(selectAllByNamedQuery(namedQuery, params));
@@ -191,7 +183,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de escrita de dados no datasource 
+	 *   Data source write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
