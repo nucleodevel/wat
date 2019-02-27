@@ -12,7 +12,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 /**
  * <p>
- *   Implementa algumas funcionalidades úteis sobre servlets para uso nos managed beans.
+ *   Implements some useful servlet functionality for use in managed beans.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -28,7 +28,7 @@ public class JsfServletUtils {
 	
     /**
 	 * <p>
-	 *   Vetor que armazena os sistemas operacionais de dispositivos móveis.
+	 *   Vector that stores the operating systems of mobile devices.
 	 * </p>
 	 */
 	private static String[] mobiles = {"android", "iphone", "ipod", "symbian"};
@@ -36,19 +36,16 @@ public class JsfServletUtils {
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     
     
     /**
 	 * <p>
-	 *   Utiliza a informação de externalAgent e verifica se a propriedade User-Agent contém um dos 
-	 *   sistemas operacionais de dispositivos móveis. Retorna isto como verdadeiro ou falso, em 
-	 *   caso contrário. 
+	 *   Uses the information from externalAgent and verifies that the User-Agent property contains 
+	 *   one of the mobile operating systems. Return this as true or false.
 	 * </p>
-	 * @return Booleano que indica se o dispositivo que está utilizando o sistema é considerado 
-	 *   móvel ou não.
 	 */
 	public static boolean isMobile() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -63,12 +60,9 @@ public class JsfServletUtils {
 	
 	/**
 	 * <p>
-	 *   Dá saída a um stream no contexto da chamada de um servlet. Corresponde a um download do 
-	 *   stream como um arquivo. 
+	 *   Provides output to a stream in the context of a servlet call. Corresponds to a stream 
+	 *   download as a file whose name will be ths second parameter.
 	 * </p>
-	 * @param stream Stream a ser dado como saída.
-	 * @param name Nome de arquivo a ser fornecido ao stream.
-	 * @throws IOException
 	 */
 	public static void showInputStream(ByteArrayInputStream stream, String name) 
 		throws IOException {

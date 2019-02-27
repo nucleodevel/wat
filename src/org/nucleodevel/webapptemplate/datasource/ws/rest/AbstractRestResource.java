@@ -30,6 +30,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
+ * @param <DAO> DAO class that provides access to the datasource.
  */
 public abstract class AbstractRestResource
 	<TID, E extends AbstractEntity<TID>, DAO extends AbstractDao<E>> {
@@ -117,7 +118,7 @@ public abstract class AbstractRestResource
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Operações de leitura de dados do datasource
+	 *   Data source read operations
 	 * --------------------------------------------------------------------------------------------
 	 */
 	

@@ -7,11 +7,11 @@ import javax.naming.NamingException;
 
 /**
  * <p>
- *   Implementa métodos que auxiliam a construção de variáveis JSF lidas dos arquivos resources. 
- *   Estes arquivos são compostos de linhas com a seguinte construção: Key=Value. As variáveis são 
- *   referenciadas por sua chave Key e devolvem o valor Value. Esta estratégia é muito usada para 
- *   fornecer ao programador um meio de criar suas variáveis, principalmente quando envolve a 
- *   questão de internacionalização.  
+ *   Implements methods that help construct variables read from resource files or the Tomcat 
+ *   context. These files are composed of lines with the following construct: Key = Value. The 
+ *   variables are referenced by their Key and return their Value. This strategy is widely used to 
+ *   provide the programmer with a means of creating their variables, especially in the matter of 
+ *   environment configuration.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -26,24 +26,22 @@ public class VariableUtils {
 
 	
     /**
-	 * Caminho padrão do arquivo de variáveis customizadas usadas por webapptemplate. Como exemplo 
-	 * temos as variáveis-padrão de erro e sucesso, acesso indevido, etc.
+	 * Default path of the custom variable file used by webapptemplate. As an example we have the 
+	 * standard error and success variables, improper access, etc.
 	 */
 	private static final String RESOURCE_GENERIC_MSG = "/resources/generic-messages";
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     
     /**
      * <p>
-     *   Tenta obter o valor de uma variável definida no ambiente do servidor. 
+     *   Attempts to get the value of a variable defined in the server environment.
      * </p>
-     * @param key Nome da variável de ambiente.
-     * @return Valor da variável de ambiente cujo nome foi passado por parâmetro.
      */
     public static String getVariableFromEnvironment(String key) {
     	InitialContext initialContext = null;
@@ -60,11 +58,9 @@ public class VariableUtils {
     
     /**
 	 * <p>
-	 *   Este método fornece o conteúdo da variável cuja chave é passada por parâmetro e está 
-	 *   localizada no arquivo padrão cujo caminho é referenciado por RESOURCE_GENERIC_MSG.
+	 *   This method supplies the contents of the variable whose key is passed by parameter and is 
+	 *   located in the default file whose path is referenced by RESOURCE_GENERIC_MSG.
 	 * </p>
-	 * @param key Chave da variável a ser retornada.
-	 * @return Valor (conteúdo) da variável a ser retornada.
 	 */
 	public static String getVariableFromResource(String key) {
 		return ResourceBundle.getBundle(RESOURCE_GENERIC_MSG).getString(key);
@@ -72,12 +68,9 @@ public class VariableUtils {
 	
 	/**
 	 * <p>
-	 *   Este método fornece o conteúdo da variável cuja chave é passada como 2° parâmetro e está 
-	 *   localizada no arquivo cujo caminho é passado no 1° parâmetro.
+	 *   This method provides the contents of the variable whose key is passed as the second 
+	 *   parameter and is located in the file whose path is passed in the first parameter.
 	 * </p>
-	 * @param resource Caminho absoluto do arquivo onde a variável está armazenada.
-	 * @param key Chave da variável a ser retornada.
-	 * @return Valor (conteúdo) da variável a ser retornada.
 	 */
 	public static String getVariableFromResource(String resource, String key) {
 		return ResourceBundle.getBundle(resource).getString(key);

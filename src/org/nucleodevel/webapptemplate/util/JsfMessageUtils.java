@@ -5,11 +5,10 @@ import javax.faces.context.FacesContext;
 
 /**
  * <p>
- *   Implementa métodos que auxiliam a construção de variáveis JSF lidas dos arquivos resources. 
- *   Estes arquivos são compostos de linhas com a seguinte construção: Key=Value. As variáveis são 
- *   referenciadas por sua chave Key e devolvem o valor Value. Esta estratégia é muito usada para 
- *   fornecer ao programador um meio de criar suas variáveis, principalmente quando envolve a 
- *   questão de internacionalização.  
+ *   Implements methods that help construct JSF variables read from resources files. These files 
+ *   are composed of lines with the following format: Key = Value. The variables are referenced by 
+ *   their Key and return their Value. This strategy is widely used to provide the programmer with 
+ *   a means to create their variables, especially when it involves the internationalization issue. 
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -18,20 +17,18 @@ public class JsfMessageUtils {
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     
 
     /**
      * <p>
-     *   Este método lê o conteúdo da mensagem fornecida pela exceção ou, se esta mengagem não 
-     *   existir, da mensagem cuja chave é passada por parâmetro e está localizada no arquivo 
-     *   padrão cujo caminho é referenciado por RESOURCE_GENERIC_MSG. Depois, adiciona esta 
-     *   mensagem ao fluxo de mensagens JSF como uma mensagem de erro. 
+     *   This method reads the contents of the message provided by the exception or, if this 
+     *   message does not exist, of the message whose key is passed by parameter and is located in 
+     *   the default file whose path is referenced by RESOURCE_GENERIC_MSG. It then adds this 
+     *   message to the JSF message flow as an error message.
      * </p>
-     * @param ex Exceção que motiva a mensagem de erro.
-     * @param defaultMsg Mensagem usada no caso da exceção não fornecer mensagem alguma.
      */
     public static void addErrorMessage(Exception ex, String defaultMsg) {
         String msg = ex.getLocalizedMessage();
@@ -43,11 +40,10 @@ public class JsfMessageUtils {
 
     /**
      * <p>
-	 *   Este método lê o conteúdo da mensagem cuja chave é passada por parâmetro e está localizada 
-	 *   no arquivo padrão cujo caminho é referenciado por RESOURCE_GENERIC_MSG. Depois, adiciona 
-	 *   esta mensagem ao fluxo de mensagens JSF como uma mensagem de erro.  
+	 *   This method reads the contents of the message whose key is passed by parameter and is 
+	 *   located in the default file whose path is referenced by RESOURCE_GENERIC_MSG. It then adds 
+	 *   this message to the JSF message flow as an error message.  
 	 * </p>
-     * @param key Chave da mensagem a ser retornada.
      */
     public static void addErrorMessage(String key) {
         FacesMessage facesMsg = new FacesMessage(
@@ -61,12 +57,10 @@ public class JsfMessageUtils {
 
     /**
      * <p>
-	 *   Este método lê o conteúdo da mensagem cuja chave é passada no 2° parâmetro e está 
-	 *   localizada no arquivo cujo caminho é passado no 1° parâmetro. Depois, adiciona esta 
-	 *   mensagem ao fluxo de mensagens JSF como uma mensagem de erro.  
+	 *   This method reads the contents of the message whose key is passed in the second parameter 
+	 *   and is located in the file whose path is passed in the first parameter. It then adds this 
+	 *   message to the JSF message flow as an error message.
 	 * </p>
-     * @param resource Caminho absoluto do arquivo onde a mensagem está armazenada.
-	 * @param key Chave da mensagem a ser retornada.
      */
     public static void addErrorMessage(String resource, String key) {
         FacesMessage facesMsg = new FacesMessage(
@@ -80,9 +74,9 @@ public class JsfMessageUtils {
 
     /**
      * <p>
-	 *   Este método lê o conteúdo da mensagem cuja chave é passada por parâmetro e está localizada 
-	 *   no arquivo padrão cujo caminho é referenciado por RESOURCE_GENERIC_MSG. Depois, adiciona 
-	 *   esta mensagem ao fluxo de mensagens JSF como uma mensagem de sucesso.  
+	 *   This method reads the contents of the message whose key is passed by parameter and is 
+	 *   located in the default file whose path is referenced by RESOURCE_GENERIC_MSG. It then adds 
+	 *   this message to the JSF message flow as a success message.
 	 * </p>
      * @param key Chave da mensagem a ser retornada.
      */
@@ -98,12 +92,10 @@ public class JsfMessageUtils {
 
     /**
      * <p>
-	 *   Este método lê o conteúdo da mensagem cuja chave é passada no 2° parâmetro e está 
-	 *   localizada no arquivo cujo caminho é passado no 1° parâmetro. Depois, adiciona esta 
-	 *   mensagem ao fluxo de mensagens JSF como uma mensagem de erro.  
+	 *   This method reads the contents of the message whose key is passed in the second parameter 
+	 *   and is located in the file whose path is passed in the first parameter. It then adds this 
+	 *   message to the JSF message flow as a success message.
 	 * </p>
-     * @param resource Caminho absoluto do arquivo onde a mensagem está armazenada.
-	 * @param key Chave da mensagem a ser retornada.
      */
     public static void addSuccessMessage(String resource, String key) {
         FacesMessage facesMsg = new FacesMessage(

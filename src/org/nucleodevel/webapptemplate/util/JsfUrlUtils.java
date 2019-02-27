@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 
 /**
  * <p>
- *   Implementa diversas funcionalidades úteis de URL a serem invocadas pelos managed beans.
+ *   Implements several useful URL functionalities to be invoked by managed beans.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -18,18 +18,16 @@ public class JsfUrlUtils {
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     
     
     /**
      * <p>
-     *   Tenta obter o valor de um parâmetro passado via URL e trata-o como uma String. Retorna o 
-     *   valor ou nulo, se tal parâmetro não foi encontrado. 
+     *   Tries to get the value of a parameter passed via URL and treats it as a String. Returns 
+     *   the value or null if this parameter was not found.
      * </p>
-     * @param param Nome do parâmetro passado via URL.
-     * @return String com o valor do parâmetro passado via URL.
      */
     public static String getUrlStringParam(String param) {
     	String value = 
@@ -43,11 +41,9 @@ public class JsfUrlUtils {
     
     /**
      * <p>
-     *   Tenta obter o valor de um parâmetro passado via URL e trata-o como uma Long. Retorna o 
-     *   valor ou nulo, se tal parâmetro não foi encontrado. 
+     *   Tries to get the value of a parameter passed via URL and treats it as a Long. Returns 
+     *   the value or null if this parameter was not found.
      * </p>
-     * @param param Nome do parâmetro passado via URL.
-     * @return Long com o valor do parâmetro passado via URL.
      */
     public static Long getUrlLongParam(String param) {
     	try {
@@ -62,11 +58,9 @@ public class JsfUrlUtils {
     
     /**
      * <p>
-     *   Tenta obter o valor de um parâmetro passado via URL e trata-o como um Date. Retorna o 
-     *   valor ou nulo, se tal parâmetro não foi encontrado. 
+     *   Tries to get the value of a parameter passed via URL and treats it as a Date. Returns 
+     *   the value or null if this parameter was not found.
      * </p>
-     * @param param Nome do parâmetro passado via URL.
-     * @return Date com o valor do parâmetro passado via URL.
      */
     public static Date getUrlDateParam(String param) {
     	String strValue = getUrlStringParam(param); 

@@ -4,7 +4,7 @@ import java.lang.reflect.ParameterizedType;
 
 /**
  * <p>
- *   Implementa algumas funcionalidades úteis para classes parametrizadas.
+ *   Implements some useful functions for parameterized classes.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -13,20 +13,16 @@ public class ParameterizedClassUtils {
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     
     
     /**
 	 * <p>
-	 *   Obtém o tipo Class do tipo-parâmetro definido em parameterizedClass e cujo índice é 
-	 *   parameterIndex. 
+	 *   Gets the type Class <?> of the parameter type defined in parameterizedClass and whose 
+	 *   index is parameterIndex.
 	 * </p>
-	 * @param parameterizedClass Classe que contém os tipos-parâmetro.
-	 * @param parameterIndex Indíce do parâmetro cuja classe será obtida.
-	 * @return O tipo Class do tipo-parâmetro definido em parameterizedClass e cujo índice é 
-	 *   parameterIndex.
 	 */
 	public static Class<?> getParameterClassFromParameterizedClass(
 		Class<?> parameterizedClass, int parameterIndex

@@ -14,13 +14,14 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um managed bean para estatísticas, 
- *   buscas e relatórios, a fim de não poluir o managed bean responsável pelo CRUD da entidade E.
+ *   Abstract subclass of AbstractMb that implements the default behavior of a managed bean for 
+ *   statistics, queries, and reports, in order not to pollute the subclasses of AbstractJsfCrudMb.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <E> subclasse de AbstractEntity que mapeia uma entidade em um datasource.
- * @param <DAO> classe DAO que apóia o managed bean.
- * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
+ * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
+ * @param <DAO> DAO class that provides access to the datasource.
+ * @param <SDAO> DAO class that maps the current HTTP session of the application that owns this 
+ *   managed bean.
  */
 public abstract class AbstractJsfStatsMb
 	<E extends AbstractEntity<?>, DAO extends AbstractDao<E>, SDAO extends AbstractSessionJsfDao>
@@ -38,44 +39,35 @@ public abstract class AbstractJsfStatsMb
 	
     /**
      * <p>
-     *   Considere que a classe que estende AbstractMb seja MB. Todo MB deve estar associado a 
-     *   uma subclasse de AbstractDao DAO e ambas, MB e DAO, tenham uma classe entidade E como tipo 
-     *   parametrizado. DAO será responsável por efetivamente realizar as operações no datasource  
-     *   que MB necessitar.
+     *   DAO provides access to the datasource used by the managed bean.
      * </p>
      */
     @Inject
 	private DAO dao;
     
-	/**
+    /**
      * <p>
-     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do managed bean. 
-     *   Geralmente usado para se obter nome desta classe.
+     *   Attribute that stores the class adopted by E, which is the target entity of the DAO. It is
+     *   often used to get the name of this class.
      * </p>
      */
     private Class<E> entityClass;
 	
 	/**
 	 * <p>
-	 *   O atributo begin é usado como valor de início em operações que filtram buscas por 
-	 *   períodos. Nenhuma operação de período é definida aqui neste managed bean, mas fornece um 
-	 *   meio comum de armazenar os atributos de início e fim.
+	 *   Used as the beggining date for searches. No operations are defined here, but begin can be 
+	 *   used in subclasses in your searches. Begin must be started by an HTTP GET parameter with 
+	 *   the same name.
 	 * </p>
-	 * <p>
-     *   Tenta obter o valor inicial de um parâmetro de URL begin.
-     * </p>
 	 */
 	private Date begin;
 	
 	/**
 	 * <p>
-	 *   O atributo end é usado como valor de início em operações que filtram buscas por 
-	 *   períodos. Nenhuma operação de período é definida aqui neste managed bean, mas fornece um 
-	 *   meio comum de armazenar os atributos de início e fim.
+	 *   Used as the end date for searches. No operation is defined here, but the end can be used 
+	 *   in subclasses in your searches. End must be started by an HTTP GET parameter with the same 
+	 *   name.
 	 * </p>
-	 * <p>
-     *   Tenta obter o valor inicial de um parâmetro de URL end.
-     * </p>
 	 */
 	private Date end;
 	
@@ -93,7 +85,7 @@ public abstract class AbstractJsfStatsMb
 
     /**
      * <p>
-     *   Obtém tipo class do tipo E via ParameterizedClassUtils
+     *   Returns the class<?> of E via ParameterizedClassUtils
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -107,7 +99,8 @@ public abstract class AbstractJsfStatsMb
  
 	/**
      * <p>
-     *   Tenta obter begin via parâmetro URL 'id' ou atribui null.
+     *   Attempts to get the attribute begin by the HTTP GET parameter with the same name or define 
+     *   null.
      * </p>
      */
     public Date getBegin() {
@@ -122,7 +115,8 @@ public abstract class AbstractJsfStatsMb
 
 	/**
      * <p>
-     *   Tenta obter end via parâmetro URL 'id' ou atribui null.
+     *   Attempts to get the attribute end by the HTTP GET parameter with the same name or define 
+     *   null.
      * </p>
      */
     public Date getEnd() {
@@ -138,14 +132,14 @@ public abstract class AbstractJsfStatsMb
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Permissões
+	 *   JSF View Filters
 	 * --------------------------------------------------------------------------------------------
 	 */
     
 	/**
      * <p>
-     *   Filtro que possibilita o managed bean permitir ou proibir a visualização do resultado de 
-     *   uma busca, geralmente expressa em search.jsf
+     *   Filter that enables the managed bean to allow or prohibit the search of entities. 
+     *   Intended to be used primarily in search.jsf, but can be used in other JSF views.
      * </p>
      * @return Permissão para visualização do resultado de uma busca
      */
@@ -153,8 +147,8 @@ public abstract class AbstractJsfStatsMb
     
     /**
      * <p>
-     *   Filtro que possibilita o managed bean permitir ou proibir a visualização do resultado de 
-     *   uma relatório, geralmente expresso em report.jsf
+     *   Filter that enables the managed bean to allow or prohibit the report of entities. 
+     *   Intended to be used primarily in report.jsf, but can be used in other JSF views.
      * </p>
      * @return Permissão para visualização do resultado de um relatório
      */

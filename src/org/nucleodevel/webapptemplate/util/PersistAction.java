@@ -2,8 +2,7 @@ package org.nucleodevel.webapptemplate.util;
 
 /**
  * <p>
- *   Tipo enumerado que expressa os 3 tipos de ações de escrita em persistência: insert, update e 
- *   delete. 
+ *   Enum that expresses the 3 types of writing actions in persistence: insert, update and delete.
  * </p>
  * @author Dallan Augusto Toledo Reis
  *

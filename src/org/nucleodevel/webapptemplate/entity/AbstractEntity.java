@@ -71,7 +71,7 @@ public abstract class AbstractEntity<TID> implements Comparable<AbstractEntity<T
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos de entidade
+	 *   Entity methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     

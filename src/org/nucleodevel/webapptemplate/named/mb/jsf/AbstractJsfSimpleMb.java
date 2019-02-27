@@ -7,10 +7,11 @@ import org.nucleodevel.webapptemplate.session.dao.jsf.AbstractSessionJsfDao;
 
 /**
  * <p>
- *   Classe abstrata que implementa o comportamento padrão de um managed bean simples.
+ *   Abstract subclass of AbstractMb that implements the default behavior of a JSF managed bean.
  * </p>
  * @author Dallan Augusto Toledo Reis
- * @param <SDAO> classe DAO que mapeia a sessão do sistema ao qual o managed bean pertence.
+ * @param <SDAO> DAO class that maps the current HTTP session of the application that owns this 
+ *   managed bean.
  */
 public abstract class AbstractJsfSimpleMb<SDAO extends AbstractSessionJsfDao>
 	extends AbstractMb<SDAO> implements Serializable {

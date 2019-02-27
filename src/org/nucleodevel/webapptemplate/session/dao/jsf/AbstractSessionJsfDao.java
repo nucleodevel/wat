@@ -7,7 +7,8 @@ import org.nucleodevel.webapptemplate.session.dao.AbstractSessionDao;
 
 /**
  * <p>
- *   Classe abstrata que possibilita ao sistema ter um acesso aos dados de sessão via FacesContext.
+ *   Abstract subclass of AbstractSessionDao that uses JSF FacesContext to provide the current
+ *   HTTP session.
  * </p>
  * @author Dallan Augusto Toledo Reis
  */
@@ -16,13 +17,13 @@ public abstract class AbstractSessionJsfDao extends AbstractSessionDao {
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
     
     
     /* (non-Javadoc)
-     * @see org.nucleodevel.webapptemplate.session.AbstractSessionDao#getSession()
+     * @see org.nucleodevel.webapptemplate.session.dao.AbstractSessionDao#getSession()
      */
     @Override
 	protected HttpSession getSession() {

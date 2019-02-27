@@ -38,10 +38,7 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
     
 	/**
      * <p>
-     *   Considere que a classe que estende AbstractJsfConverter seja C,todo C deve estar associado 
-     *   a uma subclasse de AbstractDao DAO e ambas, C e DAO, tenham uma classe entidade E como 
-     *   tipo parametrizado. DAO será responsável por fornecer instâncias do tipo E que C 
-     *   necessitar.
+     *   DAO provides an instance of E according to the string passed by the converter.
      * </p>
      */
     @Inject
@@ -49,8 +46,8 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
     
 	/**
      * <p>
-     *   Atributo que armazena a classe assumida por E, que é a entidade alvo do converter. 
-     *   Geralmente usado para se obter nome desta classe.
+     *   Attribute that stores the class adopted by E, which is the target entity of the converter. 
+     *   It is often used to get the name of this class.
      * </p>
      */
     private Class<E> entityClass;
@@ -65,7 +62,7 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
 
     /**
      * <p>
-     *   Obtém tipo class do tipo E via ParameterizedClassUtils
+     *   Returns the class<?> of E via ParameterizedClassUtils
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -80,7 +77,7 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Métodos
+	 *   Methods
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -127,10 +124,8 @@ public abstract class AbstractJsfConverter<E extends AbstractEntity<?>, DAO exte
 
     /**
      * <p>
-     *   Converte o valor String de um ID para o valor do tipo correto do ID.
+     *   Returns the ID in its correct type by converting the string passed by parameter.
      * </p>
-     * @param idString Valor string do ID.
-     * @return Valor do tipo correto do ID.
      */
     @SuppressWarnings("unchecked")
 	protected Object getIdFromString(String idString) {
