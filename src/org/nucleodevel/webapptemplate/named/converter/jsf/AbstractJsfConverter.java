@@ -15,9 +15,10 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 
 /**
  * <p>
- *   Abstract class used by JSF to obtain an instance of E of a string that contains the identifier 
- *   of that instance. This string is usually provided by JSF components such as selects, radio 
- *   buttons, and checkboxes, and the convert requests the corresponding instance to DAO.
+ *   Abstract class used by JSF to obtain an instance of E based on a string that contains the 
+ *   identifier of that instance. This string is usually provided by JSF components such as 
+ *   selects, radio buttons, and checkboxes, and the converter requests the corresponding instance 
+ *   to DAO.
  * <p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.

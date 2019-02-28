@@ -108,7 +108,7 @@ public abstract class AbstractJsfCrudMb
     
     /**
      * <p>
-     *   Selected is deduced by ID passed by HTTP GET or is considered null.
+     *   Selected is deduced by the ID passed by HTTP GET or is considered null.
      * </p>
      */
     public E getSelected() {
@@ -160,7 +160,7 @@ public abstract class AbstractJsfCrudMb
 	
 	/**
 	 * <p>
-	 *   Returns the list of all entities in the datasource at a given time, overwriting the last 
+	 *   Returns the list of all E entities in the datasource at a given time, overwriting the last 
 	 *   read if the parameter is true. Uses canAll(), implemented by subclasses, as a permission 
 	 *   filter.
 	 * </p>
@@ -224,8 +224,7 @@ public abstract class AbstractJsfCrudMb
 
 	/**
 	 * <p>
-     *   Tests canCreate() as the permission filter and does an insert operation for selected,
-     *   but continues in the same view.
+     *   Tests canCreate() as the permission filter and does an insert operation for selected.
      * </p>
      */
 	public void createOnly() {
@@ -395,7 +394,8 @@ public abstract class AbstractJsfCrudMb
     /**
      * <p>
      *   Filter that enables the managed bean to allow or prohibit the viewing of entities stored 
-     *   in "all". Intended to be used primarily in view-all.jsf, but can be used in other JSF views.
+     *   in "all". Intended to be used primarily in view-all.jsf, but can be used in other JSF 
+     *   views.
      * </p>
      */
     public abstract boolean canViewAll();
@@ -413,7 +413,6 @@ public abstract class AbstractJsfCrudMb
      *   Filter that enables the managed bean to allow or prohibit the creation of "selected". 
      *   Intended to be used primarily in create.jsf, but can be used in other JSF views.
      * </p>
-     * @return Permissão para criação de newSelected
      */
     public abstract boolean canCreate();
     
@@ -422,7 +421,6 @@ public abstract class AbstractJsfCrudMb
      *   Filter that enables the managed bean to allow or prohibit the editing of a specific E 
      *   entity. Intended to be used primarily in JSF views.
      * </p>
-     * @return Permissão para edição de uma entidade específica do tipo E
      */
     public abstract boolean canEdit(E selected);
     
@@ -431,7 +429,6 @@ public abstract class AbstractJsfCrudMb
      *   Filter that enables the managed bean to allow or prohibit the removing of a specific E 
      *   entity. Intended to be used primarily in JSF views.
      * </p>
-     * @return Permissão para remoção de uma entidade específica do tipo E
      */
     public abstract boolean canRemove(E selected);
     
@@ -440,7 +437,6 @@ public abstract class AbstractJsfCrudMb
      *   Filter that enables the managed bean to allow or prohibit the viewing of "selected". 
      *   Intended to be used primarily in view.jsf, but can be used in other JSF views.
      * </p>
-     * @return Permissão para visualização de selected
      */
     public boolean canView() {
     	return canView(getSelected());
@@ -451,7 +447,6 @@ public abstract class AbstractJsfCrudMb
      *   Filter that enables the managed bean to allow or prohibit the editing of "selected". 
      *   Intended to be used primarily in edit.jsf, but can be used in other JSF views.
      * </p>
-     * @return Permissão para edição de selected
      */
     public boolean canEdit() {
     	return canEdit(getSelected());
@@ -462,7 +457,6 @@ public abstract class AbstractJsfCrudMb
      *   Filter that enables the managed bean to allow or prohibit the removing of "selected". 
      *   Intended to be used primarily in remove.jsf, but can be used in other JSF views.
      * </p>
-     * @return Permissão para remoção de selected
      */
     public boolean canRemove() {
     	return canRemove(getSelected());

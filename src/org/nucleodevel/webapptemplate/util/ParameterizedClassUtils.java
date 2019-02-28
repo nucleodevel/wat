@@ -20,7 +20,7 @@ public class ParameterizedClassUtils {
     
     /**
 	 * <p>
-	 *   Gets the type Class <?> of the parameter type defined in parameterizedClass and whose 
+	 *   Gets the type Class<?> of the parameter type defined in parameterizedClass and whose 
 	 *   index is parameterIndex.
 	 * </p>
 	 */

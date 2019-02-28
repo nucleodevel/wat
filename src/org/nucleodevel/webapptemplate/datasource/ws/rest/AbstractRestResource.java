@@ -22,11 +22,9 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 /**
  * <p>
  *   Abstract class that implements the default behavior of a REST webservice resource that 
- *   provides operations of entities E to an AbstractRestClient.   
- * </p>
- * <p>
- *   Since a Web service resource typically needs a DAO to access a database or other data source, 
- *   it must indicate which subclass of AbstractDao will be its DAO.
+ *   provides operations of E entities to an AbstractRestClient. Since a Web service resource 
+ *   typically needs a DAO to access a database or other datasource, it must indicate which 
+ *   subclass of AbstractDao will be its DAO.
  * </p>
  * @author Dallan Augusto Toledo Reis
  * @param <E> Subclass of AbstractEntity that maps an entity of a datasource.
@@ -53,7 +51,7 @@ public abstract class AbstractRestResource
     
     /**
      * <p>
-     *   Attribute that stores the class adopted by DAO that provides access to the data source 
+     *   Attribute that stores the class adopted by DAO that provides access to the datasource 
      *   used by this REST resource.
      * </p>
      */
@@ -92,7 +90,6 @@ public abstract class AbstractRestResource
 	 *   Returns a new instance of DAO via default constructor. Therefore, every class that is 
 	 *   adopted by DAO must have a default constructor without parameters.
 	 * </p>
-	 * @return Instância da classe parametrizada DAO
 	 */
 	@SuppressWarnings("unchecked")
 	public DAO getNewDaoInstance() {
@@ -118,7 +115,7 @@ public abstract class AbstractRestResource
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source read operations
+	 *   Datasource read operations
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -179,7 +176,7 @@ public abstract class AbstractRestResource
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source write operations 
+	 *   Datasource write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	

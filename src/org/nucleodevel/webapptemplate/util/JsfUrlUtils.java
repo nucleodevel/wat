@@ -26,7 +26,7 @@ public class JsfUrlUtils {
     /**
      * <p>
      *   Tries to get the value of a parameter passed via URL and treats it as a String. Returns 
-     *   the value or null if this parameter was not found.
+     *   the value or null, if this parameter was not found.
      * </p>
      */
     public static String getUrlStringParam(String param) {
@@ -42,7 +42,7 @@ public class JsfUrlUtils {
     /**
      * <p>
      *   Tries to get the value of a parameter passed via URL and treats it as a Long. Returns 
-     *   the value or null if this parameter was not found.
+     *   the value or null, if this parameter was not found.
      * </p>
      */
     public static Long getUrlLongParam(String param) {
@@ -59,7 +59,7 @@ public class JsfUrlUtils {
     /**
      * <p>
      *   Tries to get the value of a parameter passed via URL and treats it as a Date. Returns 
-     *   the value or null if this parameter was not found.
+     *   the value or null, if this parameter was not found.
      * </p>
      */
     public static Date getUrlDateParam(String param) {

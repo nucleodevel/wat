@@ -8,8 +8,8 @@ import javax.naming.NamingException;
 /**
  * <p>
  *   Implements methods that help construct variables read from resource files or the Tomcat 
- *   context. These files are composed of lines with the following construct: Key = Value. The 
- *   variables are referenced by their Key and return their Value. This strategy is widely used to 
+ *   context. These files are composed of lines with the following construct: Key = Value. A 
+ *   variable is referenced by its key and is returned its value. This strategy is widely used to 
  *   provide the programmer with a means of creating their variables, especially in the matter of 
  *   environment configuration.
  * </p>
@@ -27,7 +27,7 @@ public class VariableUtils {
 	
     /**
 	 * Default path of the custom variable file used by webapptemplate. As an example we have the 
-	 * standard error and success variables, improper access, etc.
+	 * default error and success variables, improper access, etc.
 	 */
 	private static final String RESOURCE_GENERIC_MSG = "/resources/generic-messages";
 	

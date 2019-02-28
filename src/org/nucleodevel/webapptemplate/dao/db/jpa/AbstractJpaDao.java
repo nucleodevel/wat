@@ -71,7 +71,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source read operations 
+	 *   Datasource read operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -127,10 +127,8 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 
 	/**
      * <p>
-     *   Returns all entities read from a list of NamedQuery results.
+     *   Returns all entities read from a result list of a NamedQuery.
      * </p>
-     * @param namedQuery NamedQuery string.
-     * @param params Required NamedQuery parameters.
      */
     protected List<E> selectAllByNamedQuery(String namedQuery, Map<String, Object> params) {
     	getEntityManager().getEntityManagerFactory().getCache().evictAll();
@@ -147,10 +145,8 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 
 	/**
      * <p>
-     *   Returns the entities read from a list of NamedQuery results that are in a given range.
+     *   Returns the entities read from a result list of a NamedQuery that are in a given range.
      * </p>
-     * @param namedQuery NamedQuery string.
-     * @param params Required NamedQuery parameters.
      * @param limit Number of entities.
      * @param offset First entity.
      */
@@ -171,10 +167,8 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
     
     /**
      * <p>
-     *   Returns all entities read from a list of NamedQuery results, and then forces an ordering.
+     *   Returns all entities read from a result list of a NamedQuery, and then forces an ordering.
      * </p>
-     * @param namedQuery NamedQuery string.
-     * @param params Required NamedQuery parameters.
      */
     protected List<E> selectAllByNamedQueryAndSort(String namedQuery, Map<String, Object> params) {
     	return sort(selectAllByNamedQuery(namedQuery, params));
@@ -183,7 +177,7 @@ public abstract class AbstractJpaDao<E extends AbstractEntity<?>> extends Abstra
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source write operations 
+	 *   Datasource write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	

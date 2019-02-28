@@ -56,7 +56,7 @@ public abstract class AbstractJsfStatsMb
 	/**
 	 * <p>
 	 *   Used as the beggining date for searches. No operations are defined here, but begin can be 
-	 *   used in subclasses in your searches. Begin must be started by an HTTP GET parameter with 
+	 *   used in subclasses in their searches. Begin must be started by an HTTP GET parameter with 
 	 *   the same name.
 	 * </p>
 	 */
@@ -64,8 +64,8 @@ public abstract class AbstractJsfStatsMb
 	
 	/**
 	 * <p>
-	 *   Used as the end date for searches. No operation is defined here, but the end can be used 
-	 *   in subclasses in your searches. End must be started by an HTTP GET parameter with the same 
+	 *   Used as the end date for searches. No operation is defined here, but end can be used in 
+	 *   subclasses in their searches. End must be started by an HTTP GET parameter with the same 
 	 *   name.
 	 * </p>
 	 */
@@ -141,7 +141,6 @@ public abstract class AbstractJsfStatsMb
      *   Filter that enables the managed bean to allow or prohibit the search of entities. 
      *   Intended to be used primarily in search.jsf, but can be used in other JSF views.
      * </p>
-     * @return Permissão para visualização do resultado de uma busca
      */
     public abstract boolean canSearch();
     
@@ -150,7 +149,6 @@ public abstract class AbstractJsfStatsMb
      *   Filter that enables the managed bean to allow or prohibit the report of entities. 
      *   Intended to be used primarily in report.jsf, but can be used in other JSF views.
      * </p>
-     * @return Permissão para visualização do resultado de um relatório
      */
     public abstract boolean canReport();
     

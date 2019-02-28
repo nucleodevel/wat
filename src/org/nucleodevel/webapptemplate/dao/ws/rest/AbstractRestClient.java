@@ -66,14 +66,13 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
      *   A subclass must implement a method that returns the URL of the REST resource. Used by 
      *   getResource().
      * </p>
-     * @return URL do recurso do webservice.
      */
     public abstract String getResourceUrl();
 	
     /**
      * <p>
-     *   A subclass must implement a method that indicates the specific type of List for entities 
-     *   E.
+     *   A subclass must implement a method that indicates the specific type of List for E 
+     *   entities.
      * </p>
      */
     public abstract GenericType<List<E>> getGenericTypeForList();
@@ -81,7 +80,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source read operations 
+	 *   Datasource read operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -118,7 +117,7 @@ public abstract class AbstractRestClient<E extends AbstractEntity<?>> extends Ab
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source write operations 
+	 *   Datasource write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	

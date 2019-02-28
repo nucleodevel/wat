@@ -12,7 +12,7 @@ import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
 /**
  * <p>
  *   Abstract class that implements the default behavior of a DAO that provides access to a 
- *   datasource in applications that use webapptemplate. This data source can be a database or a 
+ *   datasource in applications that use webapptemplate. This datasource can be a database or a 
  *   webservice that receives persistence operations.
  * </p>
  * @author Dallan Augusto Toledo Reis
@@ -63,7 +63,6 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	 *   Returns a new instance of E via default constructor. Therefore, every class that is 
 	 *   adopted by E must have a default constructor without parameters.
 	 * </p>
-	 * @return Instância da classe parametrizada E
 	 */
 	@SuppressWarnings("unchecked")
 	public E getNewEntityInstance() {
@@ -88,14 +87,11 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
     /**
 	 * <p>
-	 *   Method used before data source insertion and update operations to prevent a non-unique 
+	 *   Method used before datasource insertion and update operations to prevent a non-unique 
 	 *   entity from being persisted and causing an error. The isInsert flag is required to 
 	 *   indicate whether the operation is an insert or update, since the update operation should 
 	 *   ignore the entity itself being persisted.
 	 * </p>
-	 * @param entity Entity that will be tested as unique.
-	 * @param isInsert Indicate whether the operation is an insert or update.
-	 * @return Boolean that indicates whether or not the entity is unique.
 	 */
 	public boolean isAnUniqueEntity(E entity, boolean isInsert) {
 		Map<String, Object> params = getUniqueParams(entity);
@@ -114,14 +110,13 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
      *   A subclass must implement a method that returns the values of the unique attributes of the
      *   entity.
      * </p>
-     * @param entity Entity E from which the map of unique parameters will be mounted.
      */
     protected abstract Map<String, Object> getUniqueParams(E entity);
 	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source read operations 
+	 *   Datasource read operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 
@@ -136,15 +131,15 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
 	/**
 	 * <p>
-	 *   A subclass must implement a method that is used by isAnUniqueEntity to get all entities 
-	 *   that match the values passed by the parameters.
+	 *   A subclass must implement a method that is used by isAnUniqueEntity() to get all entities 
+	 *   whose unique attributes values match the values passed by the parameters.
 	 * </p>
 	 */
 	public abstract List<E> selectAllByUniqueParams(Map<String, Object> params);
 	
 	/**
 	 * <p>
-	 *   A subclass must implement a method that returns all entities read from a data source that 
+	 *   A subclass must implement a method that returns all entities read from a datasource that 
 	 *   are in a specific range.
 	 * </p>
 	 */
@@ -170,7 +165,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
-	 *   Data source write operations 
+	 *   Datasource write operations 
 	 * --------------------------------------------------------------------------------------------
 	 */
 	
@@ -212,8 +207,8 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
 	
 	/**
 	 * <p>
-	 *   A method that can be used to correct and returns a previous operation that returned an 
-	 *   unordered collection of E entities.
+	 *   A method that can be used to correct a previous operation that returned an unordered 
+	 *   collection of E entities. Then this list is returned.
 	 * </p>
 	 */
 	public List<E> sort(List<E> entities) {

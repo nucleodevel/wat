@@ -44,7 +44,7 @@ public class JsfServletUtils {
     /**
 	 * <p>
 	 *   Uses the information from externalAgent and verifies that the User-Agent property contains 
-	 *   one of the mobile operating systems. Return this as true or false.
+	 *   one of the mobile operating systems. Returns this as true or false.
 	 * </p>
 	 */
 	public static boolean isMobile() {
@@ -61,7 +61,7 @@ public class JsfServletUtils {
 	/**
 	 * <p>
 	 *   Provides output to a stream in the context of a servlet call. Corresponds to a stream 
-	 *   download as a file whose name will be ths second parameter.
+	 *   download as a file whose name will be this second parameter.
 	 * </p>
 	 */
 	public static void showInputStream(ByteArrayInputStream stream, String name) 
