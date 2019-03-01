@@ -42,17 +42,6 @@ public abstract class AbstractMb<SDAO extends AbstractSessionDao> implements Ser
      * </p>
 	 */
     @Inject
-	private SDAO sessionDao;
-	
-	
-	/* 
-	 * --------------------------------------------------------------------------------------------
-	 *   Getters and setters
-	 * --------------------------------------------------------------------------------------------
-	 */
-    
-    public SDAO getSessionDao() {
-		return sessionDao;
-	}
+	protected SDAO sessionDao;
     
 }

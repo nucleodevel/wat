@@ -43,7 +43,7 @@ public abstract class AbstractJsfStatsMb
      * </p>
      */
     @Inject
-	private DAO dao;
+	protected DAO dao;
     
     /**
      * <p>
@@ -79,11 +79,7 @@ public abstract class AbstractJsfStatsMb
 	 */
 	
     
-	protected DAO getDao() {
-    	return dao;
-	}
-
-    /**
+	/**
      * <p>
      *   Returns the class<?> of E via ParameterizedClassUtils
      * </p>

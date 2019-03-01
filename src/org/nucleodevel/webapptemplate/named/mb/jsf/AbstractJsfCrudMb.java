@@ -55,18 +55,18 @@ public abstract class AbstractJsfCrudMb
 	public void initAbstractJsfCrudMb() {
     	String idString = JsfUrlUtils.getUrlStringParam("id");
 		
-		E newEntity = getDao().getNewEntityInstance();
+		E newEntity = dao.getNewEntityInstance();
 		String entityIdClass = newEntity.getEntityIdClass().getSimpleName();
 		
 		if (idString != null && !idString.equals("")) {
     		if (entityIdClass.equals("Long"))
-    			selected = getDao().selectOne(Long.parseLong(idString));
+    			selected = dao.selectOne(Long.parseLong(idString));
     		else if (entityIdClass.equals("Integer"))
-    			selected = getDao().selectOne(Integer.parseInt(idString));
+    			selected = dao.selectOne(Integer.parseInt(idString));
     		else if (entityIdClass.equals("Short"))
-    			selected = getDao().selectOne(Short.parseShort(idString));
+    			selected = dao.selectOne(Short.parseShort(idString));
     		else
-    			selected = getDao().selectOne(idString);
+    			selected = dao.selectOne(idString);
 		}
 	}
 	
@@ -86,7 +86,7 @@ public abstract class AbstractJsfCrudMb
      * </p>
      */
     @Inject
-	private DAO dao;
+	protected DAO dao;
     
 	/**
      * <p>
@@ -121,11 +121,7 @@ public abstract class AbstractJsfCrudMb
 	 */
 	
     
-	protected DAO getDao() {
-    	return dao;
-	}
-
-    /**
+	/**
      * <p>
      *   Returns the class<?> of E via ParameterizedClassUtils
      * </p>
@@ -157,7 +153,7 @@ public abstract class AbstractJsfCrudMb
 	 */
 	public E getNewSelected() {
 		if (selected == null)
-			selected = getDao().getNewEntityInstance();
+			selected = dao.getNewEntityInstance();
 		return selected;
 	}
 
@@ -181,7 +177,7 @@ public abstract class AbstractJsfCrudMb
     		return null;
     	
 		if (all == null || refresh)
-			all = getDao().selectAll();
+			all = dao.selectAll();
     	return all;
 	}
 	
@@ -213,7 +209,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName =  
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-		if (!getDao().isAnUniqueEntity(selected, true)) {
+		if (!dao.isAnUniqueEntity(selected, true)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -248,7 +244,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-        if (!getDao().isAnUniqueEntity(selected, true)) {
+        if (!dao.isAnUniqueEntity(selected, true)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -273,7 +269,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-		if (!getDao().isAnUniqueEntity(selected, false)) {
+		if (!dao.isAnUniqueEntity(selected, false)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -310,7 +306,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-		if (!getDao().isAnUniqueEntity(selected, false)) {
+		if (!dao.isAnUniqueEntity(selected, false)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -371,11 +367,11 @@ public abstract class AbstractJsfCrudMb
     	if (selected != null) {
             try {
             	if (persistAction == PersistAction.INSERT)
-            		getDao().insert(selected);
+            		dao.insert(selected);
             	else if (persistAction == PersistAction.UPDATE)
-            		getDao().update(selected);
+            		dao.update(selected);
             	else if (persistAction == PersistAction.DELETE)
-            		getDao().delete(selected);
+            		dao.delete(selected);
             	if (successMessage != null)
             		JsfMessageUtils.addSuccessMessage(RESOURCE_APP_MSG, successMessage);
             } catch (EJBException ex) {
