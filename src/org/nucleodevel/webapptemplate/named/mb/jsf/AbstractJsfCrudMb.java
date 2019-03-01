@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 
@@ -36,6 +37,38 @@ public abstract class AbstractJsfCrudMb
 	<E extends AbstractEntity<?>, DAO extends AbstractDao<E>, SDAO extends AbstractSessionJsfDao>
 	extends AbstractMb<SDAO> 
 	implements Serializable {
+	
+	
+	/* 
+	 * --------------------------------------------------------------------------------------------
+	 *   Post constructor
+	 * --------------------------------------------------------------------------------------------
+	 */
+
+	
+	/**
+     * <p>
+     *   Selected is deduced by the ID passed by HTTP GET or is considered null.
+     * </p>
+     */
+    @PostConstruct
+	public void initAbstractJsfCrudMb() {
+    	String idString = JsfUrlUtils.getUrlStringParam("id");
+		
+		E newEntity = getDao().getNewEntityInstance();
+		String entityIdClass = newEntity.getEntityIdClass().getSimpleName();
+		
+		if (idString != null && !idString.equals("")) {
+    		if (entityIdClass.equals("Long"))
+    			selected = getDao().selectOne(Long.parseLong(idString));
+    		else if (entityIdClass.equals("Integer"))
+    			selected = getDao().selectOne(Integer.parseInt(idString));
+    		else if (entityIdClass.equals("Short"))
+    			selected = getDao().selectOne(Short.parseShort(idString));
+    		else
+    			selected = getDao().selectOne(idString);
+		}
+	}
 	
 	
 	/* 
@@ -106,29 +139,7 @@ public abstract class AbstractJsfCrudMb
     	return entityClass;
     }
     
-    /**
-     * <p>
-     *   Selected is deduced by the ID passed by HTTP GET or is considered null.
-     * </p>
-     */
     public E getSelected() {
-		if (selected == null) {
-			String idString = JsfUrlUtils.getUrlStringParam("id");
-    		
-			E newEntity = getDao().getNewEntityInstance();
-    		String entityIdClass = newEntity.getEntityIdClass().getSimpleName();
-    		
-    		if (idString != null && !idString.equals("")) {
-	    		if (entityIdClass.equals("Long"))
-	    			selected = getDao().selectOne(Long.parseLong(idString));
-	    		else if (entityIdClass.equals("Integer"))
-	    			selected = getDao().selectOne(Integer.parseInt(idString));
-	    		else if (entityIdClass.equals("Short"))
-	    			selected = getDao().selectOne(Short.parseShort(idString));
-	    		else
-	    			selected = getDao().selectOne(idString);
-    		}
-		}
 		return selected;
 	}
 
@@ -202,7 +213,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName =  
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-		if (!getDao().isAnUniqueEntity(getSelected(), true)) {
+		if (!getDao().isAnUniqueEntity(selected, true)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -237,7 +248,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-        if (!getDao().isAnUniqueEntity(getSelected(), true)) {
+        if (!getDao().isAnUniqueEntity(selected, true)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -262,7 +273,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
+		if (!getDao().isAnUniqueEntity(selected, false)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -299,7 +310,7 @@ public abstract class AbstractJsfCrudMb
     	String lcClassSimpleName = 
         	Character.toLowerCase(classSimpleName.charAt(0)) + classSimpleName.substring(1);
     	
-		if (!getDao().isAnUniqueEntity(getSelected(), false)) {
+		if (!getDao().isAnUniqueEntity(selected, false)) {
 			JsfMessageUtils.addErrorMessage(
 				RESOURCE_APP_MSG, lcClassSimpleName + ".persistence.unique.error"
 			);
@@ -439,7 +450,7 @@ public abstract class AbstractJsfCrudMb
      * </p>
      */
     public boolean canView() {
-    	return canView(getSelected());
+    	return canView(selected);
     }
     
     /**
@@ -449,7 +460,7 @@ public abstract class AbstractJsfCrudMb
      * </p>
      */
     public boolean canEdit() {
-    	return canEdit(getSelected());
+    	return canEdit(selected);
     }
     
     /**
@@ -459,7 +470,7 @@ public abstract class AbstractJsfCrudMb
      * </p>
      */
     public boolean canRemove() {
-    	return canRemove(getSelected());
+    	return canRemove(selected);
     }
     
 }
