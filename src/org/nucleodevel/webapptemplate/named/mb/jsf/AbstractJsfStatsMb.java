@@ -15,6 +15,7 @@ import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
 import org.nucleodevel.webapptemplate.session.dao.jsf.AbstractSessionJsfDao;
 import org.nucleodevel.webapptemplate.util.JsfUrlUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
+import org.nucleodevel.webapptemplate.util.RandomUtils;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
@@ -80,10 +81,28 @@ public abstract class AbstractJsfStatsMb
 	 */
 	private Date end;
 	
+	/**
+	 * <p>
+	 *   Stores a model for a chart that shows the daily total of the entities E in a given 
+	 *   period.
+	 * </p>
+	 */
 	private LineChartModel totalByDayChartModel;
 	
+	/**
+	 * <p>
+	 *   Stores a model for a chart that shows the monthly total of the entities E in a given 
+	 *   period.
+	 * </p>
+	 */
 	private LineChartModel totalByMonthChartModel;
 	
+	/**
+	 * <p>
+	 *   Stores a model for a chart that shows the yearly total of the entities E in a given 
+	 *   period.
+	 * </p>
+	 */
 	private LineChartModel totalByYearChartModel;
 	
 	
@@ -147,14 +166,22 @@ public abstract class AbstractJsfStatsMb
 	 * --------------------------------------------------------------------------------------------
 	 */
 
-    
+	/**
+     * <p>
+     *   Method that supports the getters that stores the time unit charts.
+     * </p>
+     */
 	private LineChartModel getTotalByTimeUnitChartModel(
 		Map<Date, Long> totalByTimeUnit, String xTickFormat 
 	) throws ParseException {
 		
+		String seriesColor = RandomUtils.getRandomStringColorForChartSeries();
+		
 		LineChartModel totalByTimeUnitChartModel = new LineChartModel();
         totalByTimeUnitChartModel.setZoom(true);
         totalByTimeUnitChartModel.setShowPointLabels(true);
+        totalByTimeUnitChartModel.setSeriesColors(seriesColor);
+        totalByTimeUnitChartModel.setShadow(false);
 
 		LineChartSeries series = new LineChartSeries();
 		series.setSmoothLine(true);
@@ -183,6 +210,12 @@ public abstract class AbstractJsfStatsMb
         return totalByTimeUnitChartModel;
 	}
     
+	/**
+	 * <p>
+	 *   Stores a model for a chart that shows the daily total of the entities E in a given 
+	 *   period.
+	 * </p>
+	 */
 	public LineChartModel getTotalByDayChartModel(Map<Date, Long> totalByDay) 
 		throws ParseException {
 		
@@ -191,6 +224,12 @@ public abstract class AbstractJsfStatsMb
 		return totalByDayChartModel;
 	}
 
+	/**
+	 * <p>
+	 *   Stores a model for a chart that shows the monthly total of the entities E in a given 
+	 *   period.
+	 * </p>
+	 */
 	public LineChartModel getTotalByMonthChartModel(Map<Date, Long> totalByMonth) 
 		throws ParseException {
 		
@@ -199,6 +238,12 @@ public abstract class AbstractJsfStatsMb
 		return totalByMonthChartModel;
 	}
 
+	/**
+	 * <p>
+	 *   Stores a model for a chart that shows the yearly total of the entities E in a given 
+	 *   period.
+	 * </p>
+	 */
 	public LineChartModel getTotalByYearChartModel(Map<Date, Long> totalByYear) 
 		throws ParseException {
 		
