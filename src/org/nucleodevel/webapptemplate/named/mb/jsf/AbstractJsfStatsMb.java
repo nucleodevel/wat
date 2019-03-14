@@ -1,7 +1,11 @@
 package org.nucleodevel.webapptemplate.named.mb.jsf;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +15,11 @@ import org.nucleodevel.webapptemplate.named.mb.AbstractMb;
 import org.nucleodevel.webapptemplate.session.dao.jsf.AbstractSessionJsfDao;
 import org.nucleodevel.webapptemplate.util.JsfUrlUtils;
 import org.nucleodevel.webapptemplate.util.ParameterizedClassUtils;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.DateAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 /**
  * <p>
@@ -71,6 +80,12 @@ public abstract class AbstractJsfStatsMb
 	 */
 	private Date end;
 	
+	private LineChartModel totalByDayChartModel;
+	
+	private LineChartModel totalByMonthChartModel;
+	
+	private LineChartModel totalByYearChartModel;
+	
 	
 	/* 
 	 * --------------------------------------------------------------------------------------------
@@ -123,7 +138,74 @@ public abstract class AbstractJsfStatsMb
 
 	public void setEnd(Date end) {
 		this.end = end;
-	}  
+	}
+	
+	
+	/* 
+	 * --------------------------------------------------------------------------------------------
+	 *   Chart getters
+	 * --------------------------------------------------------------------------------------------
+	 */
+
+    
+	private LineChartModel getTotalByTimeUnitChartModel(
+		Map<Date, Long> totalByTimeUnit, String xTickFormat 
+	) throws ParseException {
+		
+		LineChartModel totalByTimeUnitChartModel = new LineChartModel();
+        totalByTimeUnitChartModel.setZoom(true);
+        totalByTimeUnitChartModel.setShowPointLabels(true);
+
+		LineChartSeries series = new LineChartSeries();
+		series.setSmoothLine(true);
+		
+		DateAxis xAxis = new DateAxis();
+	    xAxis.setTickAngle(-70);
+	    xAxis.setTickFormat(xTickFormat);
+	    totalByTimeUnitChartModel.getAxes().put(AxisType.X, xAxis);
+        Axis yAxis = totalByTimeUnitChartModel.getAxis(AxisType.Y);
+        yAxis.setTickFormat("%d");
+        yAxis.setMin(0);
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+        
+        long max = 0;
+        for (Map.Entry<Date, Long> entry : totalByTimeUnit.entrySet()) {
+        	String key = dateFormat.format(entry.getKey());
+        	Long value = entry.getValue();
+        	if (value > max)
+        		max = value;
+            series.set(key, value);
+        }
+        
+        totalByTimeUnitChartModel.addSeries(series);
+		
+        return totalByTimeUnitChartModel;
+	}
+    
+	public LineChartModel getTotalByDayChartModel(Map<Date, Long> totalByDay) 
+		throws ParseException {
+		
+		if (totalByDayChartModel == null)
+			totalByDayChartModel = getTotalByTimeUnitChartModel(totalByDay, "%d/%m/%Y");
+		return totalByDayChartModel;
+	}
+
+	public LineChartModel getTotalByMonthChartModel(Map<Date, Long> totalByMonth) 
+		throws ParseException {
+		
+		if (totalByMonthChartModel == null)
+			totalByMonthChartModel = getTotalByTimeUnitChartModel(totalByMonth, "%m/%Y");
+		return totalByMonthChartModel;
+	}
+
+	public LineChartModel getTotalByYearChartModel(Map<Date, Long> totalByYear) 
+		throws ParseException {
+		
+		if (totalByYearChartModel == null)
+			totalByYearChartModel = getTotalByTimeUnitChartModel(totalByYear, "%Y");
+		return totalByYearChartModel;
+	}
 	
 	
 	/* 

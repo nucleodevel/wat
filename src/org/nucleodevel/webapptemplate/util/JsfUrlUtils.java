@@ -73,6 +73,37 @@ public class JsfUrlUtils {
 			}
 		}
 		return null;
-    }
+    } 
+    
+    /**
+     * <p>
+     *   Tries to get the value of a parameter passed via URL and treats it as a Array of Longs. 
+     *   Returns the value or null, if this parameter was not found.
+     * </p>
+     */
+    public static Long[] getUrlArrayOfLongsParam(String paramKey) {
+    	String paramValue = FacesContext.getCurrentInstance().getExternalContext()
+    		.getRequestParameterMap().get(paramKey);
+    	
+    	if (paramValue != null) {
+    		String SEPARATOR = ";";
+	    	String[] strParams = paramValue.split(SEPARATOR);
+	    	
+	    	if (strParams != null && strParams.length > 0) {
+	    		Long[] params = new Long[strParams.length];
+	    		
+	    		for (int i = 0; i < strParams.length; i++)
+			    	try {
+				    	params[i] = Long.parseLong(strParams[i]);
+			    	} catch (NumberFormatException e) {
+			    		return null;
+			    	}
+	    		
+	    		return params;
+	    	}
+    	}
+    	
+    	return null;
+    } 
 	
 }
