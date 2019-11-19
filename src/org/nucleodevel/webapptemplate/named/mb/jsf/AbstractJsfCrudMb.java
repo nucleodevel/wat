@@ -363,7 +363,7 @@ public abstract class AbstractJsfCrudMb
      *   Generic method that effectively performs persistence operations.
      * </p>
      */
-    private void persist(PersistAction persistAction, String successMessage) {
+    protected void persist(PersistAction persistAction, String successMessage) {
     	if (selected != null) {
             try {
             	if (persistAction == PersistAction.INSERT)
